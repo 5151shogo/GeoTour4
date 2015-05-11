@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/background2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/participant1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_customize_2"
+        android:text="@string/ID"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/guide1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_customize_2"
+        android:text="@string/new_record"
+        android:textColor="#FFFFFF"/>
+    
+    <Button
+        android:id="@+id/bt_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_customize_2"
+        android:text="@string/bt_back"
+        android:textColor="#FFFFFF"/>
+    
+</RelativeLayout>

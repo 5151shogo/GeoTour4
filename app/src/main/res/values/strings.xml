@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GeoTour</string>
+    <string name="action_settings">設定</string>
+    <string name="tv_tour1">和歌山観光ジオツアー</string>
+    <string name="tv_tour2">カメラ</string>
+    <string name="tv_tour3">閉じる</string>
+    <string name="tv_selectplace">場所を選択してください</string>
+    <string name="bt_back">戻る</string>
+    <string name="bt_go">次へ</string>
+    <string name="bt_search">検索</string>
+    <string name="bt_kakunin">GoogleMap表示</string>
+    <string name="bt_iii">戻る</string>
+    <string name="getBtn">中心位置を取得</string>
+    <string name="title_activity_camera">カメラデモ</string>
+    <string name="btn_open_camera">写真を撮る</string>
+    <string name="imagev_desc_camera">写真</string>
+    <string name="camera">写真を撮る</string>
+    <string name="upload">アップロードする</string>
+    <string name="new_record">新規登録</string>
+    <string name="ID">IDを入力する</string>
+    <string name="disconnect_peer_button">未接続</string>
+    <string name="connect_peer_button">接続</string>
+    <string name="get_file_button">写真選択</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="client_text">クライアント側です ．ファイルから写真を選択してください</string>
+    <string name="group_owner_text">"私がグループの所有者ですか？"</string>
+    <string name="desc_image">Image View</string>
+    <string name="explain">説明</string>
+    <string name="paint">おえかきする</string>
+    <string name="save">メモ保存</string>
+	<string name="sukusho">この画面でスクリーンショットをしてください</string>
+	<string name="touroku">ユーザ登録画面</string>
+	<string name="name">※お名前</string>
+	<string name="tou">登録</string>
+	<string name="kanryou">新規登録完了</string>
+	<string name="kanryou2">下記ボタンよりログインしてください</string>
+	<string name="login">ログイン</string>
+	<string name="sex">※性別</string>
+	<string name="radio_button1">男</string>
+	<string name="radio_button2">女</string>
+	<string name="user_ID">※ユーザIDの作成(半角英数字6桁以上)</string>
+	<string name="st_login">※ガイドIDを入力してください</string>
+    <string name="st_login_participant">※ユーザIDを入力してください</string>
+	<string name="st_login2">※ユーザID(半角英数字6文字以上)</string>
+	<string name="bt_top">Top画面へ</string>
+    <string name="select2">行く場所にチェックをいれてください(複数可)</string>
+    <string name="map">地図画面へ戻る</string>
+    <string name="memo">※メモ記述(ガイドさんの話を聞いてここに残そう！)</string>
+    <string name="look">ガイドの写真を見る</string>
+    <string name="action_delete">書いたものを削除</string>
+    <string name="action_save">保存</string>
+
+    <string name="enable_p2p_button">P2P On/Off</string>
+    <string name="discover_peers_button">発見</string>
+    
+   
+    <string name="empty_message">デバイスが見つかりません．P2Pの電源をONにし，上記アクションバーから検出を実行してください</string>
+    <string name="p2p_off_warning">上記のアクションバーボタンのシステム設定からP2Pを有効にする</string>
+    <string name="label_me">ME</string>
+    <string name="label_peers">PEERS</string>
+
+
+    <string-array name="sp_place">
+        <item>上富田町</item>
+        <item>北山村</item>
+        <item>串本町</item>
+        <item>古座川町</item>
+        <item>白浜町</item>
+        <item>新宮市</item>
+        <item>すさみ町</item>
+        <item>太地町</item>
+        <item>那智勝浦町</item>
+    </string-array>
+
+   
+
+</resources>

@@ -1,0 +1,252 @@
+-- Merging decision tree log ---
+manifest
+ADDED from AndroidManifest.xml:1:1
+	xmlns:android
+		ADDED from AndroidManifest.xml:1:11
+	package
+		ADDED from AndroidManifest.xml:2:5
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionName
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionCode
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:4:5
+	android:name
+		ADDED from AndroidManifest.xml:4:22
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from AndroidManifest.xml:5:5
+	android:name
+		ADDED from AndroidManifest.xml:5:22
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from AndroidManifest.xml:7:5
+	android:name
+		ADDED from AndroidManifest.xml:7:22
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from AndroidManifest.xml:9:5
+	android:name
+		ADDED from AndroidManifest.xml:9:22
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from AndroidManifest.xml:11:5
+	android:name
+		ADDED from AndroidManifest.xml:11:22
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:13:5
+	android:name
+		ADDED from AndroidManifest.xml:13:22
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:15:5
+	android:name
+		ADDED from AndroidManifest.xml:15:22
+uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
+ADDED from AndroidManifest.xml:17:5
+	android:name
+		ADDED from AndroidManifest.xml:17:22
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from AndroidManifest.xml:19:5
+	android:name
+		ADDED from AndroidManifest.xml:19:22
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from AndroidManifest.xml:21:5
+	android:name
+		ADDED from AndroidManifest.xml:21:22
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from AndroidManifest.xml:23:5
+	android:name
+		ADDED from AndroidManifest.xml:23:22
+uses-permission#android.permission.CAMERA
+ADDED from AndroidManifest.xml:25:5
+	android:name
+		ADDED from AndroidManifest.xml:25:22
+uses-feature#0x00020000
+ADDED from AndroidManifest.xml:27:5
+	android:required
+		ADDED from AndroidManifest.xml:28:9
+	android:glEsVersion
+		ADDED from AndroidManifest.xml:27:19
+permission#geotouer4.yoslab.net.myapplication.permission.MAPS_RECEIVE
+ADDED from AndroidManifest.xml:31:5
+	android:protectionLevel
+		ADDED from AndroidManifest.xml:32:9
+	android:name
+		ADDED from AndroidManifest.xml:31:17
+uses-permission#geotouer4.yoslab.net.myapplication.permission.MAPS_RECEIVE
+ADDED from AndroidManifest.xml:34:5
+	android:name
+		ADDED from AndroidManifest.xml:34:22
+application
+ADDED from AndroidManifest.xml:36:5
+MERGED from com.android.support:appcompat-v7:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.google.android.gms:play-services:6.5.87:20:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+	android:label
+		ADDED from AndroidManifest.xml:39:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:37:9
+	android:icon
+		ADDED from AndroidManifest.xml:38:9
+	android:theme
+		ADDED from AndroidManifest.xml:41:9
+	android:largeHeap
+		ADDED from AndroidManifest.xml:40:9
+	android:name
+		ADDED from AndroidManifest.xml:42:9
+meta-data#com.google.android.maps.v2.API_KEY
+ADDED from AndroidManifest.xml:45:9
+	android:name
+		ADDED from AndroidManifest.xml:45:20
+	android:value
+		ADDED from AndroidManifest.xml:46:13
+meta-data#com.google.android.gms.version
+ADDED from AndroidManifest.xml:47:9
+MERGED from com.google.android.gms:play-services:6.5.87:21:9
+	android:name
+		ADDED from AndroidManifest.xml:47:20
+	android:value
+		ADDED from AndroidManifest.xml:48:13
+uses-library#com.google.android.maps
+ADDED from AndroidManifest.xml:50:9
+	android:name
+		ADDED from AndroidManifest.xml:50:23
+activity#geotouer4.yoslab.net.myapplication.TopActivity
+ADDED from AndroidManifest.xml:53:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:54:41
+	android:label
+		ADDED from AndroidManifest.xml:55:13
+	android:name
+		ADDED from AndroidManifest.xml:54:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:56:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:57:17
+	android:name
+		ADDED from AndroidManifest.xml:57:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:59:17
+	android:name
+		ADDED from AndroidManifest.xml:59:27
+activity#geotouer4.yoslab.net.myapplication.GuideActivity
+ADDED from AndroidManifest.xml:62:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:62:49
+	android:name
+		ADDED from AndroidManifest.xml:62:19
+activity#geotouer4.yoslab.net.myapplication.ParticipantActivity
+ADDED from AndroidManifest.xml:63:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:63:55
+	android:name
+		ADDED from AndroidManifest.xml:63:19
+activity#geotouer4.yoslab.net.myapplication.Guide_id_Activity
+ADDED from AndroidManifest.xml:64:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:64:53
+	android:name
+		ADDED from AndroidManifest.xml:64:19
+activity#geotouer4.yoslab.net.myapplication.Participant_id_Activity
+ADDED from AndroidManifest.xml:65:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:65:59
+	android:name
+		ADDED from AndroidManifest.xml:65:19
+activity#geotouer4.yoslab.net.myapplication.Sign_up_Activity
+ADDED from AndroidManifest.xml:66:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:66:52
+	android:name
+		ADDED from AndroidManifest.xml:66:19
+activity#geotouer4.yoslab.net.myapplication.Sign_up_participant_Activity
+ADDED from AndroidManifest.xml:67:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:67:64
+	android:name
+		ADDED from AndroidManifest.xml:67:19
+activity#geotouer4.yoslab.net.myapplication.Login_Activity
+ADDED from AndroidManifest.xml:68:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:68:50
+	android:name
+		ADDED from AndroidManifest.xml:68:19
+activity#geotouer4.yoslab.net.myapplication.Login_participant_Activity
+ADDED from AndroidManifest.xml:69:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:69:62
+	android:name
+		ADDED from AndroidManifest.xml:69:19
+activity#geotouer4.yoslab.net.myapplication.MapActivity
+ADDED from AndroidManifest.xml:70:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:70:47
+	android:name
+		ADDED from AndroidManifest.xml:70:19
+activity#geotouer4.yoslab.net.myapplication.Map_participant_Activity
+ADDED from AndroidManifest.xml:71:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:71:60
+	android:name
+		ADDED from AndroidManifest.xml:71:19
+activity#geotouer4.yoslab.net.myapplication.SelectActivity
+ADDED from AndroidManifest.xml:72:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:72:50
+	android:name
+		ADDED from AndroidManifest.xml:72:19
+activity#geotouer4.yoslab.net.myapplication.Select2Activity
+ADDED from AndroidManifest.xml:73:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:73:51
+	android:name
+		ADDED from AndroidManifest.xml:73:19
+activity#geotouer4.yoslab.net.myapplication.DetailActivity
+ADDED from AndroidManifest.xml:74:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:74:50
+	android:name
+		ADDED from AndroidManifest.xml:74:19
+activity#geotouer4.yoslab.net.myapplication.Detail_participant_Activity
+ADDED from AndroidManifest.xml:75:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:75:63
+	android:name
+		ADDED from AndroidManifest.xml:75:19
+activity#geotouer4.yoslab.net.myapplication.CameraActivity
+ADDED from AndroidManifest.xml:76:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:76:50
+	android:name
+		ADDED from AndroidManifest.xml:76:19
+activity#geotouer4.yoslab.net.myapplication.Camera_participant_Activity
+ADDED from AndroidManifest.xml:77:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:77:63
+	android:name
+		ADDED from AndroidManifest.xml:77:19
+activity#geotouer4.yoslab.net.myapplication.PaintActivity
+ADDED from AndroidManifest.xml:78:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:78:49
+	android:name
+		ADDED from AndroidManifest.xml:78:19
+activity#geotouer4.yoslab.net.myapplication.UpLoadActivity
+ADDED from AndroidManifest.xml:79:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:79:50
+	android:name
+		ADDED from AndroidManifest.xml:79:19
+uses-sdk
+INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
+MERGED from com.android.support:appcompat-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.google.android.gms:play-services:6.5.87:18:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+	android:targetSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:minSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0

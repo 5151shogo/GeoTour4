@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="right">
+
+    <TextView
+        android:id="@+id/st_login_participant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="22sp"
+        android:layout_gravity="center"
+        android:text="@string/st_login_participant" />
+    
+    <TextView
+        android:id="@+id/st_login2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="18sp"
+        android:layout_gravity="left"
+        android:text="@string/st_login2" />
+    
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="IDを入力してください" />
+  
+    
+    <Button
+        android:id="@+id/bt_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="@drawable/button_customize_3"
+        android:text="@string/bt_back"
+        android:textColor="#FFFFFF"/>
+    
+    <Button
+        android:id="@+id/bt_go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50sp"
+        android:background="@drawable/button_customize_3"
+        android:text="@string/bt_go"
+        android:textColor="#FFFFFF"/>
+    
+</LinearLayout>

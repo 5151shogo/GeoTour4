@@ -8,7 +8,7 @@ import android.provider.MediaStore;
 public class Camera_participant_Activity extends Activity {
 
     private static final int CAMERA_REQUEST_CODE = 1;
-        
+
     // カメラインスタンス
     @Override
     protected void onCreate(Bundle savedInstanceState) {

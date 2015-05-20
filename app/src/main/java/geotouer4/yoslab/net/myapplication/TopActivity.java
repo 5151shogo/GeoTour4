@@ -60,20 +60,32 @@ public class TopActivity extends Activity{
 
 			@Override//アニメーション
 			public void onClick(View v) {
-				Intent cacheIntent = new Intent(TopActivity.this, ParticipantActivity.class);
+				Intent cacheIntent = new Intent(TopActivity.this, Map_participant_Activity.class);
 				startActivity(cacheIntent);
-				overridePendingTransition(R.anim.zoom_enter,R.anim.zoom_exit);
+				overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 			}
 		});
-		
+
 		//ガイド用
 		Button guide = (Button)findViewById(R.id.guide1);
 		guide.setOnClickListener(new View.OnClickListener() {
 
 			@Override//アニメーション
 			public void onClick(View v) {
-                flag.transitionCount = 0;
+				flag.transitionCount = 0;
 				Intent cacheIntent = new Intent(TopActivity.this, GuideActivity.class);
+				startActivity(cacheIntent);
+				overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+			}
+		});
+
+		Button weather = (Button)findViewById(R.id.weather);
+		weather.setOnClickListener(new View.OnClickListener() {
+
+			@Override//アニメーション
+			public void onClick(View v) {
+				flag.transitionCount = 0;
+				Intent cacheIntent = new Intent(TopActivity.this, Weather_Activity.class);
 				startActivity(cacheIntent);
 				overridePendingTransition(R.anim.zoom_enter,R.anim.zoom_exit);
 			}

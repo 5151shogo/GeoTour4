@@ -77,6 +77,9 @@
         <activity android:name=".Camera_participant_Activity" android:screenOrientation="landscape"></activity>
         <activity android:name=".PaintActivity" android:screenOrientation="landscape"></activity>
         <activity android:name=".UpLoadActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Weather_Activity" android:screenOrientation="portrait"></activity>
     </application>
 
+    <uses-sdk android:minSdkVersion="9" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

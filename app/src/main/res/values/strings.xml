@@ -52,6 +52,7 @@
     <string name="look">ガイドの写真を見る</string>
     <string name="action_delete">書いたものを削除</string>
     <string name="action_save">保存</string>
+    <string name="bt_weather">天気</string>
 
     <string name="enable_p2p_button">P2P On/Off</string>
     <string name="discover_peers_button">発見</string>

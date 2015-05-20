@@ -32,7 +32,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -110,16 +109,16 @@ public class Map_participant_Activity extends FragmentActivity {
         //MapControllerの取得
         if (myLocate != null) {
             //現在地情報取得成功
-            CameraPosition cameraPos = new CameraPosition.Builder()
-                    .target(new LatLng(myLocate.getLatitude(), myLocate.getLongitude())).zoom(17.0f).bearing(0).build();
-            CameraUpdate camera = CameraUpdateFactory.newCameraPosition(cameraPos);
-            mMap.animateCamera(camera);
+//            CameraPosition cameraPos = new CameraPosition.Builder()
+//                    .target(new LatLng(myLocate.getLatitude(), myLocate.getLongitude())).zoom(17.0f).bearing(0).build();
+
             //現在地までパッと移動
             //MapCtrl.setCenter(GP);
         } else {
             //現在地情報取得失敗時の処理
             Toast.makeText(this, "現在地取得できません！", Toast.LENGTH_SHORT).show();
         }
+
 
 
         //Fragmentの取得
@@ -143,6 +142,13 @@ public class Map_participant_Activity extends FragmentActivity {
 
         //現在位置の獲得（パラメータ）
         Location t = mMap.getMyLocation();
+
+        //くるくる
+        showProgressDialog();
+
+        //南に移動
+        CameraUpdate camera = CameraUpdateFactory.newLatLngZoom(new LatLng(33.54701289300004, 135.7205299620001), 9);
+        mMap.moveCamera(camera);
 
         Log.d(TAG, "MapActivity start!");
 
@@ -269,10 +275,6 @@ public class Map_participant_Activity extends FragmentActivity {
         }
         myQueue.start();
 
-        //南へ移動する
-//        CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(
-//                new LatLng(latitude, longitude), 10);
-//        mMap.moveCamera(cu);
 
 
 
@@ -378,11 +380,7 @@ public class Map_participant_Activity extends FragmentActivity {
                             IdList.idLists.clear();
                             finish();
 
-                                /*
 
-                                TODO:idListからcheckIDを取得したい()たけーー
-
-                                 */
 
 
 

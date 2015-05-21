@@ -7,14 +7,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,7 +28,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.net.URL;
-import android.widget.ArrayAdapter;
 
 public class Weather_Activity extends Activity {
     private LocationManager mLocationManager;
@@ -41,14 +38,14 @@ public class Weather_Activity extends Activity {
     private InputStream is;
     private BufferedReader reader;
     private ListView lv;
-    private String morn3;
-    private String min3;
-    private String night3;
-    private String eve3;
-    private String max3;
-    private String day3;
-    private String requestURL;
-
+    public String morn3;
+    public String min3;
+    public String night3;
+    public String eve3;
+    public String max3;
+    public String day3;
+    public String requestURL;
+    private int id;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,9 +71,7 @@ public class Weather_Activity extends Activity {
         System.out.println("latitude === " + latitude);
         System.out.println("longitude === " + longitude);
 
-        int id = 0;
-
-        Spinner AREA1 = (Spinner)findViewById(R.id.sp_place);
+        Spinner AREA1 = (Spinner)findViewById(R.id.sp_place2);
 
         //選択された値を取得
         String selected = (String)AREA1.getSelectedItem();
@@ -277,6 +272,7 @@ public class Weather_Activity extends Activity {
     class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            System.out.println("id=="+id);
             String tag = (String) v.getTag();
             if (tag.equals("weather")) {//ここから
                 Criteria criteria = new Criteria();
@@ -334,12 +330,12 @@ public class Weather_Activity extends Activity {
                                         float eve1 = Float.parseFloat(eve);
                                         float eve2 = eve1 - 273.15f;
                                         System.out.println("eve2=======" + eve2);
-                                    String max = temp.getString("max");
+                                        String max = temp.getString("max");
                                         float max1 = Float.parseFloat(max);
-                                    float max2 = max1 - 273.15f;
+                                        float max2 = max1 - 273.15f;
                                         System.out.println("max2=======" + max2);
                                         String day = temp.getString("day");
-                                    float day1 = Float.parseFloat(day);
+                                        float day1 = Float.parseFloat(day);
                                         float day2 = day1 - 273.15f;
                                         System.out.println("day2=======" + day2);
 

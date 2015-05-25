@@ -78,6 +78,7 @@
         <activity android:name=".PaintActivity" android:screenOrientation="landscape"></activity>
         <activity android:name=".UpLoadActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".Weather_Activity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Weather2_Activity" android:screenOrientation="portrait"></activity>
     </application>
 
     <uses-sdk android:minSdkVersion="9" />

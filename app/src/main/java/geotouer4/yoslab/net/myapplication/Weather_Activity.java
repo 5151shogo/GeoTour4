@@ -2,6 +2,10 @@ package geotouer4.yoslab.net.myapplication;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,14 +15,17 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -28,6 +35,8 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.net.URL;
+
+import geotouer4.yoslab.net.myapplication.adapters.WeatherAdapter;
 
 public class Weather_Activity extends Activity {
     private LocationManager mLocationManager;
@@ -46,6 +55,15 @@ public class Weather_Activity extends Activity {
     public String day3;
     public String requestURL;
     public int id;
+    public WeatherAdapter mWeatherAdapter;
+    ImageLoader mImageLoader;
+
+
+    private class ViewHolder {
+        ImageView imageView;
+        TextView textView;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -134,27 +152,27 @@ public class Weather_Activity extends Activity {
                                         String morn = temp.getString("morn");
                                         float morn1 = Float.parseFloat(morn);
                                         float morn2 = morn1 - 273.15f;
-                                        System.out.println("morn2=======" + morn2);
+
                                         String min = temp.getString("min");
                                         float min1 = Float.parseFloat(min);
                                         float min2 = min1 - 273.15f;
-                                        System.out.println("min2=======" + min2);
+
                                         String night = temp.getString("night");
                                         float night1 = Float.parseFloat(night);
                                         float night2 = night1 - 273.15f;
-                                        System.out.println("night2=======" + night2);
+
                                         String eve = temp.getString("eve");
                                         float eve1 = Float.parseFloat(eve);
                                         float eve2 = eve1 - 273.15f;
-                                        System.out.println("eve2=======" + eve2);
+
                                         String max = temp.getString("max");
                                         float max1 = Float.parseFloat(max);
                                         float max2 = max1 - 273.15f;
-                                        System.out.println("max2=======" + max2);
+
                                         String day = temp.getString("day");
                                         float day1 = Float.parseFloat(day);
                                         float day2 = day1 - 273.15f;
-                                        System.out.println("day2=======" + day2);
+
 
 
                                         String pressure = all_list.getString("pressure");
@@ -164,7 +182,7 @@ public class Weather_Activity extends Activity {
 
 
                                         JSONArray weather = all_list.getJSONArray("weather");
-                                        System.out.println("weather=======" + weather);
+
                                         JSONObject all_weather = weather.getJSONObject(0);
                                         System.out.println("all_weather=======" + all_weather);
                                         String id = all_weather.getString("id");
@@ -183,6 +201,35 @@ public class Weather_Activity extends Activity {
                                         System.out.println("deg=======" + deg);
                                         String clouds = all_list.getString("clouds");
                                         System.out.println("clouds=======" + clouds);
+
+
+
+                                        System.out.println("はいったｙｐ");
+
+                                    Intent intent = new Intent(Weather_Activity.this,Weather2_Activity.class);
+                                    System.out.println("main=========="+main);
+                                    System.out.println("id============"+id);
+                                    System.out.println("icon==========="+icon);
+                                    System.out.println("max2============"+max2);
+                                    System.out.println("min2============"+min2);
+                                    System.out.println("max2============"+max2);
+                                    System.out.println("day2============"+day2);
+
+                                    intent.putExtra("icon", icon);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+//                                        String url = "http://openweathermap.org/img/w/04d.png";
+//                                        URL url2 = new URL(url);
+//                                        ImageView imageview = new ImageView;
+
+
+//                                    String imageUrl = "http://openweathermap.org/img/w/04d.png";
+                                    //ImageLoader.ImageListener listener = ImageLoader.getImageListener();
+
+
+
+
+                                        //listview.setAdapter(mWeatherAdapter);
 
 
 
@@ -211,5 +258,6 @@ public class Weather_Activity extends Activity {
                 }
             }
         }
+
 }
 

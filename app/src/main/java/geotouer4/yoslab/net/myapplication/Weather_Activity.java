@@ -3,29 +3,18 @@ package geotouer4.yoslab.net.myapplication;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -35,8 +24,8 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 
-import geotouer4.yoslab.net.myapplication.adapters.WeatherAdapter;
 
 public class Weather_Activity extends Activity {
     private LocationManager mLocationManager;
@@ -47,22 +36,14 @@ public class Weather_Activity extends Activity {
     private InputStream is;
     private BufferedReader reader;
     private ListView lv;
-    public String morn3;
-    public String min3;
-    public String night3;
-    public String eve3;
-    public String max3;
-    public String day3;
     public String requestURL;
     public int id;
-    public WeatherAdapter mWeatherAdapter;
-    ImageLoader mImageLoader;
+    public Intent intent;
+    public ArrayList<String> mainArray;
+    public ArrayList<String> iconArray;
+    public ArrayList<Integer> maxArray;
+    public ArrayList<Integer> minArray;
 
-
-    private class ViewHolder {
-        ImageView imageView;
-        TextView textView;
-    }
 
 
     @Override
@@ -78,12 +59,19 @@ public class Weather_Activity extends Activity {
         Button button1 = (Button) findViewById(R.id.bt_button);
         button1.setTag("weather");
         button1.setOnClickListener(new ButtonClickListener());
+
+
     }
 
 
     class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            mainArray = new ArrayList<String>();
+            iconArray = new ArrayList<String>();
+            maxArray = new ArrayList<Integer>();
+            minArray = new ArrayList<Integer>();
+
 
             String tag = (String) v.getTag();
             if (tag.equals("weather")) {//ここから
@@ -140,53 +128,54 @@ public class Weather_Activity extends Activity {
                             public void onResponse(JSONObject response) {
                                 try {
 
-                                    //for(int i = 0;i<=6;i++) {
+                                    for(int i = 0;i<=6;i++) {
                                         JSONArray list = response.getJSONArray("list");//spots配列の中身がココへだーっと返ってく
-                                    JSONObject all_list = list.getJSONObject(0);
+                                        JSONObject all_list = list.getJSONObject(i);
                                         System.out.println("---------------------" + all_list);
 
-                                        String dt = all_list.getString("dt");
-                                        System.out.println("dt=======" + dt);
+//                                        String dt = all_list.getString("dt");
+//                                        System.out.println("dt=======" + dt);
                                         JSONObject temp = all_list.getJSONObject("temp");
                                         System.out.println("temp=======" + temp);
-                                        String morn = temp.getString("morn");
-                                        float morn1 = Float.parseFloat(morn);
-                                        float morn2 = morn1 - 273.15f;
+//                                        String morn = temp.getString("morn");
+//                                        float morn1 = Float.parseFloat(morn);
+//                                        float morn2 = morn1 - 273.15f;
+//                                        int morn3 = (int)morn2;
 
                                         String min = temp.getString("min");
                                         float min1 = Float.parseFloat(min);
                                         float min2 = min1 - 273.15f;
+                                        int min3 = (int) min2;
 
-                                        String night = temp.getString("night");
-                                        float night1 = Float.parseFloat(night);
-                                        float night2 = night1 - 273.15f;
+//                                        String night = temp.getString("night");
+//                                        float night1 = Float.parseFloat(night);
+//                                        float night2 = night1 - 273.15f;
 
-                                        String eve = temp.getString("eve");
-                                        float eve1 = Float.parseFloat(eve);
-                                        float eve2 = eve1 - 273.15f;
+//                                        String eve = temp.getString("eve");
+//                                        float eve1 = Float.parseFloat(eve);
+//                                        float eve2 = eve1 - 273.15f;
 
                                         String max = temp.getString("max");
                                         float max1 = Float.parseFloat(max);
                                         float max2 = max1 - 273.15f;
+                                        int max3 = (int) max2;
 
-                                        String day = temp.getString("day");
-                                        float day1 = Float.parseFloat(day);
-                                        float day2 = day1 - 273.15f;
+//                                        String day = temp.getString("day");
+//                                        float day1 = Float.parseFloat(day);
+//                                        float day2 = day1 - 273.15f;
 
 
-
-                                        String pressure = all_list.getString("pressure");
-                                        System.out.println("pressure=======" + pressure);
-                                        String humidity = all_list.getString("humidity");
-                                        System.out.println("humidity=======" + humidity);
+//                                        String pressure = all_list.getString("pressure");
+//                                        System.out.println("pressure=======" + pressure);
+//                                        String humidity = all_list.getString("humidity");
+//                                        System.out.println("humidity=======" + humidity);
 
 
                                         JSONArray weather = all_list.getJSONArray("weather");
-
                                         JSONObject all_weather = weather.getJSONObject(0);
                                         System.out.println("all_weather=======" + all_weather);
-                                        String id = all_weather.getString("id");
-                                        System.out.println("id=======" + id);
+//                                        String id = all_weather.getString("id");
+//                                        System.out.println("id=======" + id);
                                         String main = all_weather.getString("main");
                                         System.out.println("main=======" + main);
                                         String description = all_weather.getString("description");
@@ -194,30 +183,38 @@ public class Weather_Activity extends Activity {
                                         String icon = all_weather.getString("icon");
                                         System.out.println("icon=======" + icon);
 
-
-                                        String speed = all_list.getString("speed");
-                                        System.out.println("speed=======" + speed);
-                                        String deg = all_list.getString("deg");
-                                        System.out.println("deg=======" + deg);
-                                        String clouds = all_list.getString("clouds");
-                                        System.out.println("clouds=======" + clouds);
-
+//
+//                                        String speed = all_list.getString("speed");
+//                                        System.out.println("speed=======" + speed);
+//                                        String deg = all_list.getString("deg");
+//                                        System.out.println("deg=======" + deg);
+//                                        String clouds = all_list.getString("clouds");
+//                                        System.out.println("clouds=======" + clouds);
 
 
                                         System.out.println("はいったｙｐ");
 
-                                    Intent intent = new Intent(Weather_Activity.this,Weather2_Activity.class);
-                                    System.out.println("main=========="+main);
-                                    System.out.println("id============"+id);
-                                    System.out.println("icon==========="+icon);
-                                    System.out.println("max2============"+max2);
-                                    System.out.println("min2============"+min2);
-                                    System.out.println("max2============"+max2);
-                                    System.out.println("day2============"+day2);
 
-                                    intent.putExtra("icon", icon);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+                                        mainArray.add(main);
+                                        iconArray.add(icon);
+                                        maxArray.add(max3);
+                                        minArray.add(min3);
+
+                                        intent = new Intent(Weather_Activity.this, Weather2_Activity.class);
+                                        System.out.println("main==========" + main);
+                                        System.out.println("icon===========" + icon);
+                                        System.out.println("max2============" + max2);
+                                        System.out.println("min2============" + min2);
+
+                                    }
+                                        System.out.println("mainArray" + mainArray);
+                                        intent.putStringArrayListExtra("icon", iconArray);
+                                        intent.putStringArrayListExtra("main", mainArray);
+                                        intent.putIntegerArrayListExtra("max2", maxArray);
+                                        intent.putIntegerArrayListExtra("min2", minArray);
+
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 //                                        String url = "http://openweathermap.org/img/w/04d.png";
 //                                        URL url2 = new URL(url);
 //                                        ImageView imageview = new ImageView;
@@ -241,7 +238,7 @@ public class Weather_Activity extends Activity {
 //
 //                lv.setAdapter(adapter);
 
-                                   // }
+
 
                                 } catch (Exception e) {
                                     System.out.println(e);

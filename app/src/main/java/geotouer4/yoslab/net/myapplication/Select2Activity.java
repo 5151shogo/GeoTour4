@@ -94,7 +94,6 @@ public class Select2Activity extends Activity {
                                 spot.setName(spotName);
                                 _spots.add(spot); // 配列に要素を追加
                                 mSpotAdapter.addAll(_spots); // 配列をアダプターにセット
-
                             }
 
                         } catch (Exception e) {

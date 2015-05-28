@@ -1,36 +1,24 @@
 package geotouer4.yoslab.net.myapplication;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.net.URL;
-
-import geotouer4.yoslab.net.myapplication.adapters.WeatherAdapter;
+import java.util.ArrayList;
+import java.util.List;
+import geotouer4.yoslab.net.myapplication.model.Weather;
+//import geotouer4.yoslab.net.myapplication.model.Weather;
 
 public class Weather2_Activity extends Activity {
     private LocationManager mLocationManager;
@@ -41,16 +29,13 @@ public class Weather2_Activity extends Activity {
     private InputStream is;
     private BufferedReader reader;
     private ListView lv;
-    public String morn3;
-    public String min3;
-    public String night3;
-    public String eve3;
-    public String max3;
-    public String day3;
     public String requestURL;
     public int id;
-    public WeatherAdapter mWeatherAdapter;
-    ImageLoader mImageLoader;
+    private ListView mListView;
+    public ArrayList<Weather> weathers;
+    static List<String> items = new ArrayList<String>();
+    static ArrayAdapter<String> adapter;
+
 
 
     private class ViewHolder {
@@ -63,31 +48,80 @@ public class Weather2_Activity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather2);
+        mListView = (ListView)findViewById(R.id.listView);
 
-        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        items = new ArrayList();
+//        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-//        Intent data = getIntent();//前の画面で選択したデータを受けとる
-//        int Data = data.getIntExtra("int_ID", 0);//Integer型のDataに保存
+        Intent data = getIntent();//前の画面で選択したデータを受けとる
+        ArrayList<String> mainArray = data.getStringArrayListExtra("main");
+        ArrayList<String> iconArray = data.getStringArrayListExtra("icon");
+        ArrayList<Integer> maxArray = data.getIntegerArrayListExtra("max2");
+        ArrayList<Integer> minArray = data.getIntegerArrayListExtra("min2");
 
-        // Volley に用意された ImageView の拡張クラス NetworkImageView を生成する
-        NetworkImageView imageView = new NetworkImageView(this);
-        setContentView(imageView);
+        System.out.println("mainArray==============="+mainArray);
 
-        myQueue = Volley.newRequestQueue(this);
+        myQueue = Volley.newRequestQueue(this);//ネットワーク通信
 
-        // 指定したURLから画像を取得する
-        String url = "http://openweathermap.org/img/w/04d.png";
-        imageView.setImageUrl(url, new ImageLoader(myQueue, new ImageLoader.ImageCache() {
-            // キャッシュ処理が必要な場合はここに記述します
-            @Override
-            public void putBitmap(String url, Bitmap bitmap) {
+        for(int i=0;i<=6;i++) {
+
+            if (mainArray.get(i).equals("Clear")) {
+                System.out.println("晴れ！");
+
+                items.add("最高気温：" + maxArray.get(i));
+                items.add("最低気温：" + minArray.get(i));
+
+                adapter = new ArrayAdapter<String>(this,
+                        R.layout.row,
+                        R.id.text_weather,
+                        items);
+
+                mListView.setAdapter(adapter);
             }
 
-            @Override
-            public Bitmap getBitmap(String url) {
-                return null;
+            else if (mainArray.get(i).equals("Clouds")) {
+                System.out.println("曇り！");
+
+                items.add("最高気温：" + maxArray.get(i));
+                items.add("最低気温：" + minArray.get(i));
+
+                adapter = new ArrayAdapter<String>(this,
+                        R.layout.row2,
+                        R.id.text_weather,
+                        items);
+
+                mListView.setAdapter(adapter);
             }
-        }));
+
+            else if (mainArray.get(i).equals("Rain")) {
+                System.out.println("雨！");
+
+                items.add("最高気温：" + maxArray.get(i));
+                items.add("最低気温：" + minArray.get(i));
+
+
+                adapter = new ArrayAdapter<String>(this,
+                        R.layout.row3,
+                        R.id.text_weather,
+                        items);
+
+                mListView.setAdapter(adapter);
+            }
+
+            else if (mainArray.get(i).equals("Snow")) {
+                System.out.println("雪！");
+
+                items.add("最高気温：" + maxArray.get(i));
+                items.add("最低気温：" + minArray.get(i));
+
+                adapter = new ArrayAdapter<String>(this,
+                        R.layout.row4,
+                        R.id.text_weather,
+                        items);
+
+                mListView.setAdapter(adapter);
+            }
+        }
     }
 }
 

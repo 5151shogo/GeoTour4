@@ -1,7 +1,9 @@
 package geotouer4.yoslab.net.myapplication;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -43,6 +45,7 @@ public class Weather_Activity extends Activity {
     public ArrayList<String> iconArray;
     public ArrayList<Integer> maxArray;
     public ArrayList<Integer> minArray;
+    ProgressDialog dialog;//プログレスバー
 
 
 
@@ -71,6 +74,8 @@ public class Weather_Activity extends Activity {
             iconArray = new ArrayList<String>();
             maxArray = new ArrayList<Integer>();
             minArray = new ArrayList<Integer>();
+
+            showProgressDialog();
 
 
             String tag = (String) v.getTag();
@@ -214,7 +219,6 @@ public class Weather_Activity extends Activity {
                                         intent.putIntegerArrayListExtra("min2", minArray);
 
                                         startActivity(intent);
-                                        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 //                                        String url = "http://openweathermap.org/img/w/04d.png";
 //                                        URL url2 = new URL(url);
 //                                        ImageView imageview = new ImageView;
@@ -255,6 +259,36 @@ public class Weather_Activity extends Activity {
                 }
             }
         }
+
+    public void showProgressDialog() {//くるくる
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("接続中...");
+        dialog.setIndeterminate(true);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMax(10);
+        dialog.setCancelable(false);
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+
+            }
+        });
+
+        dialog.show();
+        new Thread(new Runnable(){
+            public void run() {
+                try {
+                    for (int i = 0; i < dialog.getMax(); i++) {
+                        dialog.setProgress(i);
+                        Thread.sleep(200);
+                    }
+                } catch (Exception e) {
+
+                }
+                dialog.dismiss();
+            }
+        }).start();
+    }
 
 }
 

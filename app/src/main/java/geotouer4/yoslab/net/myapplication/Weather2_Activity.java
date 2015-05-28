@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 import geotouer4.yoslab.net.myapplication.model.Weather;
 //import geotouer4.yoslab.net.myapplication.model.Weather;
 
@@ -38,6 +39,7 @@ public class Weather2_Activity extends Activity {
 
 
 
+
     private class ViewHolder {
         ImageView imageView;
         TextView textView;
@@ -50,6 +52,7 @@ public class Weather2_Activity extends Activity {
         setContentView(R.layout.activity_weather2);
         mListView = (ListView)findViewById(R.id.listView);
 
+
         items = new ArrayList();
 //        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -59,7 +62,7 @@ public class Weather2_Activity extends Activity {
         ArrayList<Integer> maxArray = data.getIntegerArrayListExtra("max2");
         ArrayList<Integer> minArray = data.getIntegerArrayListExtra("min2");
 
-        System.out.println("mainArray==============="+mainArray);
+        System.out.println("mainArray===============" + mainArray);
 
         myQueue = Volley.newRequestQueue(this);//ネットワーク通信
 
@@ -68,59 +71,50 @@ public class Weather2_Activity extends Activity {
             if (mainArray.get(i).equals("Clear")) {
                 System.out.println("晴れ！");
 
-                items.add("最高気温：" + maxArray.get(i));
-                items.add("最低気温：" + minArray.get(i));
+
+                items.add("天気："+mainArray.get(i)+"\n"+"最高気温：" + maxArray.get(i) +"\n"+"最低気温：" + minArray.get(i));
 
                 adapter = new ArrayAdapter<String>(this,
                         R.layout.row,
                         R.id.text_weather,
                         items);
-
-                mListView.setAdapter(adapter);
             }
 
-            else if (mainArray.get(i).equals("Clouds")) {
+            if (mainArray.get(i).equals("Clouds")) {
                 System.out.println("曇り！");
 
-                items.add("最高気温：" + maxArray.get(i));
-                items.add("最低気温：" + minArray.get(i));
+                items.add("天気："+mainArray.get(i)+"\n"+"最高気温：" + maxArray.get(i) +"\n"+"最低気温：" + minArray.get(i));
 
                 adapter = new ArrayAdapter<String>(this,
                         R.layout.row2,
-                        R.id.text_weather,
+                        R.id.text_weather2,
                         items);
-
-                mListView.setAdapter(adapter);
             }
 
-            else if (mainArray.get(i).equals("Rain")) {
+            if (mainArray.get(i).equals("Rain")) {
                 System.out.println("雨！");
 
-                items.add("最高気温：" + maxArray.get(i));
-                items.add("最低気温：" + minArray.get(i));
+
+                items.add("天気："+mainArray.get(i)+"\n"+"最高気温：" + maxArray.get(i) +"\n"+"最低気温：" + minArray.get(i));
 
 
                 adapter = new ArrayAdapter<String>(this,
                         R.layout.row3,
-                        R.id.text_weather,
+                        R.id.text_weather3,
                         items);
-
-                mListView.setAdapter(adapter);
             }
 
-            else if (mainArray.get(i).equals("Snow")) {
+            if (mainArray.get(i).equals("Snow")) {
                 System.out.println("雪！");
 
-                items.add("最高気温：" + maxArray.get(i));
-                items.add("最低気温：" + minArray.get(i));
+                items.add("天気："+mainArray.get(i)+"\n"+"最高気温：" + maxArray.get(i) +"\n"+"最低気温：" + minArray.get(i));
 
                 adapter = new ArrayAdapter<String>(this,
                         R.layout.row4,
-                        R.id.text_weather,
+                        R.id.text_weather4,
                         items);
-
-                mListView.setAdapter(adapter);
             }
+            mListView.setAdapter(adapter);
         }
     }
 }

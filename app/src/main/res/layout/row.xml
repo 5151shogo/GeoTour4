@@ -10,11 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <TextView
             android:id="@+id/text_weather"
             android:layout_width="match_parent"
@@ -22,10 +17,4 @@
             android:textSize="22sp"
             android:layout_weight="1"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:layout_weight="1"/>
-    </LinearLayout>
 </RelativeLayout>

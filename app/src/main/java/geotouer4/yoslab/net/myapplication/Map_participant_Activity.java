@@ -449,7 +449,7 @@ public class Map_participant_Activity extends FragmentActivity {
                 try {
                     for (int i = 0; i < dialog.getMax(); i++) {
                         dialog.setProgress(i);
-                        Thread.sleep(500);
+                        Thread.sleep(200);
                     }
                 } catch (Exception e) {
 

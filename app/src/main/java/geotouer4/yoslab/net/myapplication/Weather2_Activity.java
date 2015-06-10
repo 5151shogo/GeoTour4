@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -38,14 +36,6 @@ public class Weather2_Activity extends Activity {
     static ArrayAdapter<String> adapter;
 
 
-
-
-    private class ViewHolder {
-        ImageView imageView;
-        TextView textView;
-    }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,48 +63,51 @@ public class Weather2_Activity extends Activity {
 
 
                 items.add("天気："+mainArray.get(i)+"\n"+"最高気温：" + maxArray.get(i) +"\n"+"最低気温：" + minArray.get(i));
-
                 adapter = new ArrayAdapter<String>(this,
                         R.layout.row,
                         R.id.text_weather,
                         items);
+                mListView.setAdapter(adapter);
             }
 
-            if (mainArray.get(i).equals("Clouds")) {
+            else if (mainArray.get(i).equals("Clouds")) {
                 System.out.println("曇り！");
 
-                items.add("天気："+mainArray.get(i)+"\n"+"最高気温：" + maxArray.get(i) +"\n"+"最低気温：" + minArray.get(i));
+                items.add("天気：" + mainArray.get(i) + "\n" + "最高気温：" + maxArray.get(i) + "\n"+"最低気温：" + minArray.get(i));
 
                 adapter = new ArrayAdapter<String>(this,
                         R.layout.row2,
                         R.id.text_weather2,
                         items);
+                mListView.setAdapter(adapter);
             }
 
-            if (mainArray.get(i).equals("Rain")) {
+            else if (mainArray.get(i).equals("Rain")) {
                 System.out.println("雨！");
 
 
-                items.add("天気："+mainArray.get(i)+"\n"+"最高気温：" + maxArray.get(i) +"\n"+"最低気温：" + minArray.get(i));
+                items.add("天気：" + mainArray.get(i) + "\n" + "最高気温：" + maxArray.get(i) + "\n"+"最低気温：" + minArray.get(i));
 
 
                 adapter = new ArrayAdapter<String>(this,
                         R.layout.row3,
                         R.id.text_weather3,
                         items);
+                mListView.setAdapter(adapter);
             }
 
-            if (mainArray.get(i).equals("Snow")) {
+            else if (mainArray.get(i).equals("Snow")) {
                 System.out.println("雪！");
 
-                items.add("天気："+mainArray.get(i)+"\n"+"最高気温：" + maxArray.get(i) +"\n"+"最低気温：" + minArray.get(i));
+                items.add("天気：" + mainArray.get(i) + "\n" + "最高気温：" + maxArray.get(i) + "\n"+"最低気温：" + minArray.get(i));
 
                 adapter = new ArrayAdapter<String>(this,
                         R.layout.row4,
                         R.id.text_weather4,
                         items);
+                mListView.setAdapter(adapter);
             }
-            mListView.setAdapter(adapter);
+
         }
     }
 }

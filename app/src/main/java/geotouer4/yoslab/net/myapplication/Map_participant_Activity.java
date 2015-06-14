@@ -274,28 +274,6 @@ public class Map_participant_Activity extends FragmentActivity {
 
         }
         myQueue.start();
-
-
-
-
-//        String user_name = spotid.toString();
-//        String net = url + user_name + "&user_id=" + user_id;
-//        Log.d("Tag","net="+net);
-
-
-//        String uri = "http://www2.yoslab.net/~taniguchi/api/select_spot.php?spot_id="+Data;
-//        myQueue.add(new JsonObjectRequest(Request.Method,GET,uri,null,
-//
-//        try{
-//
-//        }
-//        catch(Exception e){
-//            System.out.println(e);
-//        }
-//
-//
-//
-//        ));
     }
 
     // クリックリスナー定義

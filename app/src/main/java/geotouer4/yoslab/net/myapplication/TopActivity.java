@@ -90,6 +90,18 @@ public class TopActivity extends Activity{
 				overridePendingTransition(R.anim.zoom_enter,R.anim.zoom_exit);
 			}
 		});
+
+		Button udp = (Button)findViewById(R.id.udp);
+		udp.setOnClickListener(new View.OnClickListener() {
+
+			@Override//アニメーション
+			public void onClick(View v) {
+				flag.transitionCount = 0;
+				Intent cacheIntent = new Intent(TopActivity.this, Udp_Activity.class);
+				startActivity(cacheIntent);
+				overridePendingTransition(R.anim.zoom_enter,R.anim.zoom_exit);
+			}
+		});
 		
 		
 		

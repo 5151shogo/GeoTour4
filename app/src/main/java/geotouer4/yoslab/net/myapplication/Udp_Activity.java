@@ -131,10 +131,10 @@ public class Udp_Activity extends Activity {
                                 byte[] data = message.getBytes();
                                 dp = new DatagramPacket(data, data.length, host, port_remote);  //DatagramPacket ì¬
                                 ds.send(dp);
-                                tv2.setText("‘—MŠ®—¹‚µ‚Ü‚µ‚½");
+                                System.out.println("Success Send");
                             } catch (Exception e) {
-                                System.err.println("Exception : " + e);
-                                tv2.setText("‘—M¸”s‚µ‚Ü‚µ‚½");
+//                                System.err.println("Exception : " + e);
+                                System.out.println("failed Send");
                             }
                         }
                     });
@@ -159,10 +159,10 @@ public class Udp_Activity extends Activity {
                 ds = new DatagramSocket();  //DatagramSocket ì¬
                 byte[] data = message.getBytes();
                 dp = new DatagramPacket(data, data.length, host, port_remote);  //DatagramPacket ì¬
-                tv2.setText("‰Šú‰»‚ªŠ®—¹‚µ‚Ü‚µ‚½");
+                System.out.println("Success shokika");
             }catch(Exception e){
-                System.err.println("Exception : " + e);
-                tv2.setText("‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½");
+//                System.err.println("Exception : " + e);
+                System.out.println("failed shokika");
             }
             // end OnCreat()
         }

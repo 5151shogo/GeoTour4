@@ -62,7 +62,7 @@ public class Udp_Activity extends Activity {
 //                    int port = 11000;
 //                    String message = "AAA";
 //                    byte[] data = message.getBytes();
-//                    DatagramSocket ds = new DatagramSocket(); //ƒ\ƒPƒbƒgì¬
+//                    DatagramSocket ds = new DatagramSocket(); //ï¿½\ï¿½Pï¿½bï¿½gï¿½ì¬
 //                    DatagramPacket dp = new DatagramPacket(data, data.length, host, port);
 //                    ds.send(dp);
 //                    ds.close();
@@ -86,11 +86,11 @@ public class Udp_Activity extends Activity {
             Button button2 = new Button(this);
             tv = new TextView(this);
             tv2 = new TextView(this);
-            tv.setText("ƒJƒEƒ“ƒ^");
+            tv.setText("ã‚«ã‚¦ãƒ³ã‚¿");
             button1.setText("send to PC");
             button2.setText("-");
 
-            //ƒŒƒCƒAƒEƒg
+            //ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½g
             linearLayout.addView(button1, new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -105,31 +105,31 @@ public class Udp_Activity extends Activity {
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             setContentView(linearLayout);
 
-            IP_remote = "133.42.155.239"; //IPƒAƒhƒŒƒX
-            port_remote = 1234;       //ƒ|[ƒg”Ô†
+            IP_remote = "133.42.155.239"; //IPã‚¢ãƒ‰ãƒ¬ã‚¹
+            port_remote = 1234;       //ãƒãƒ¼ãƒˆç•ªå·
 
-            // Button1 ‚ªƒNƒŠƒbƒN‚³‚ê‚½‚ÉŒÄ‚Ño‚³‚ê‚éƒR[ƒ‹ƒoƒbƒN‚ğ“o˜^
+            // Button1ãŒã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã¨ãã«å‘¼ã³å‡ºã•ã‚Œã‚‹ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’ç™»éŒ²
             button1.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     n++;
-                    // •¶š—ñ‚ğì‚é
+                    //æ–‡å­—åˆ—ã‚’ä½œã‚‹
                     cbuf.append(n);
-                    tv.setText(cbuf.toString());  // tv ‚É‚Í final ‚ª•K—v
+                    tv.setText(cbuf.toString());  // tvã«ã¯finalãŒå¿…è¦
                     cbuf.delete(0, 99);
                     toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
 
 
 
 
-                    // UDP@‘—M
+                    // UDPé€ä¿¡
                     runOnUiThread(new Runnable(){
                         public void run() {
                             try {
                                 InetAddress host = InetAddress.getByName(IP_remote);
-                                String message = "send by Android " + n + " \n";  // ‘—MƒƒbƒZ[ƒW
-                                ds = new DatagramSocket();  //DatagramSocket ì¬
+                                String message = "send by Android " + n + " \n";  //é€ä¿¡ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+                                ds = new DatagramSocket();  //DatagramSocketä½œæˆ
                                 byte[] data = message.getBytes();
-                                dp = new DatagramPacket(data, data.length, host, port_remote);  //DatagramPacket ì¬
+                                dp = new DatagramPacket(data, data.length, host, port_remote);  //DatagramPacket ï¿½ì¬
                                 ds.send(dp);
                                 System.out.println("Success Send");
                             } catch (Exception e) {
@@ -141,7 +141,7 @@ public class Udp_Activity extends Activity {
                 }
             });
 
-            // ƒJƒEƒ“ƒ^‚ÌŒ¸­
+            //ã‚«ã‚¦ãƒ³ã‚¿ã®æ¸›å°‘
             button2.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     n--;
@@ -152,13 +152,13 @@ public class Udp_Activity extends Activity {
                 }
             });
 
-            n=0;        // ƒJƒEƒ“ƒg’l‚Ì‰Šú’l
+            n=0;        // ã‚«ã‚¦ãƒ³ã‚¿å€¤ã®åˆæœŸåŒ–
             try{
-                InetAddress host = InetAddress.getByName(IP_remote);      // IPƒAƒhƒŒƒX
-                String message = "Send by Android";  // ‘—MƒƒbƒZ[ƒW
-                ds = new DatagramSocket();  //DatagramSocket ì¬
+                InetAddress host = InetAddress.getByName(IP_remote);      // IPã‚¢ãƒ‰ãƒ¬ã‚¹
+                String message = "Send by Android";  //é€ä¿¡ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+                ds = new DatagramSocket();  //DatagramSocketä½œæˆ
                 byte[] data = message.getBytes();
-                dp = new DatagramPacket(data, data.length, host, port_remote);  //DatagramPacket ì¬
+                dp = new DatagramPacket(data, data.length, host, port_remote);  //DatagramPacket ä½œæˆ
                 System.out.println("Success shokika");
             }catch(Exception e){
 //                System.err.println("Exception : " + e);

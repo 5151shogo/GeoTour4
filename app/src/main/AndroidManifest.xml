@@ -80,6 +80,7 @@
         <activity android:name=".Weather_Activity" android:screenOrientation="portrait"></activity>
         <activity android:name=".Weather2_Activity" android:screenOrientation="portrait"></activity>
         <activity android:name=".Udp_Activity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Udp_get_Activity" android:screenOrientation="portrait"></activity>
     </application>
 
     <uses-sdk android:minSdkVersion="9" />

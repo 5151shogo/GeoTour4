@@ -17,19 +17,19 @@ public class socketUDP {
     private String receiveData;
     private String message;
 
-    //•ÊƒXƒŒƒbƒh‚ÅÀs‚ª‚Ù‚Ú•K{
+    //ï¿½ÊƒXï¿½ï¿½ï¿½bï¿½hï¿½Åï¿½ï¿½sï¿½ï¿½ï¿½Ù‚Ú•Kï¿½{
     public String getMessage(){
 
         Thread thread = new Thread() {
             public void run() {
-                //5100”Ôƒ|[ƒg‚ğŠÄ‹‚·‚éUDPƒ\ƒPƒbƒg‚ğ¶¬
+                //5100ï¿½Ôƒ|ï¿½[ï¿½gï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½ï¿½UDPï¿½\ï¿½Pï¿½bï¿½gï¿½ğ¶ï¿½
                 //DatagramSocket recieveSocket = null;
                 try {
                     receiveSocket = new DatagramSocket(5100);
                 } catch (SocketException e) {
                     e.printStackTrace();
                 }
-                //ó‚¯•t‚¯‚éƒf[ƒ^ƒoƒbƒtƒ@‚ÆUDPƒpƒPƒbƒg‚ğì¬
+                //ï¿½ó‚¯•tï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½UDPï¿½pï¿½Pï¿½bï¿½gï¿½ï¿½ï¿½ì¬
                 byte receiveBuffer[] = new byte[1024];
 
                 DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
@@ -43,7 +43,7 @@ public class socketUDP {
                 }
 
 
-                //óM‚µ‚½ƒf[ƒ^‚ğƒƒO‚Öo—Í
+                //ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½Öoï¿½ï¿½
                 message = new String(receivePacket.getData(), 0, receivePacket.getLength());
                 Log.d("TEST", message);
             }
@@ -59,19 +59,19 @@ public class socketUDP {
         return message;
     }
 
-    //•ÊƒXƒŒƒbƒh‚ÅÀs‚·‚é‚Ù‚¤‚ª‚æ‚¢
+    //ï¿½ÊƒXï¿½ï¿½ï¿½bï¿½hï¿½Åï¿½ï¿½sï¿½ï¿½ï¿½ï¿½Ù‚ï¿½ï¿½ï¿½ï¿½æ‚¢
     public void sendMessage(String message){
-        //UDPƒ\ƒPƒbƒg‚Å©•ª‚ÌIP‚Å5100”Ôƒ|[ƒg‚ğw’è
-        InetSocketAddress remoteAddress = new InetSocketAddress("133.42.155.239",5100);
+        //UDPï¿½\ï¿½Pï¿½bï¿½gï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½IPï¿½ï¿½5100ï¿½Ôƒ|ï¿½[ï¿½gï¿½ï¿½ï¿½wï¿½ï¿½
+        InetSocketAddress remoteAddress = new InetSocketAddress("192.168.0.10",5100);
 
-        //UDPƒpƒPƒbƒg‚ÉŠÜ‚ß‚éƒf[ƒ^
+        //UDPï¿½pï¿½Pï¿½bï¿½gï¿½ÉŠÜ‚ß‚ï¿½fï¿½[ï¿½^
         byte[] sendBuffer = message.getBytes();
 
-        //UDPƒpƒPƒbƒg
+        //UDPï¿½pï¿½Pï¿½bï¿½g
         DatagramPacket sendPacket;
 
         try {
-            //DatagramPacketƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚ÄCUDPƒpƒPƒbƒg‚ğ‘—M
+            //DatagramPacketï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ÄCUDPï¿½pï¿½Pï¿½bï¿½gï¿½ğ‘—M
             sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, remoteAddress);
             new DatagramSocket().send(sendPacket);
         }catch (SocketException e){

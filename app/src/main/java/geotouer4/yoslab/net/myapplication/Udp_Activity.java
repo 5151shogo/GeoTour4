@@ -180,7 +180,7 @@ import java.net.InetAddress;
         public static void soushin(String udp1) throws Exception {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Start!!");
-            InetAddress inet = InetAddress.getByName("133.42.0.10");//送信先(変更ください)
+            InetAddress inet = InetAddress.getByName("133.42.0.10");//送信先(変更してください)
             int portNumber = 49152;//ポート番号
             DatagramSocket sendSocket = new DatagramSocket();//UDP送信用ソケット
 

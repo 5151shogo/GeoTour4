@@ -75,6 +75,18 @@
         <item>太地町</item>
         <item>那智勝浦町</item>
     </string-array>
+    <string name="title_activity_tab">詳細ページ</string>
+
+    <string name="title_section1">マイページ</string>
+    <string name="title_section2">みんなのページ</string>
+    <string name="title_section3">ヘルプ</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="hello_world">Hello world!</string>
 
    
 

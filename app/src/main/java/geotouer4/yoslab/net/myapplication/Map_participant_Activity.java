@@ -250,8 +250,8 @@ public class Map_participant_Activity extends FragmentActivity {
                                         System.out.println("参加者="+sp4.getString("Spot_id", "000"));
 
                                         //インテントの生成(呼び出すクラスの指定)
-                                        Intent intent = new Intent(Map_participant_Activity.this, Detail_participant_Activity.class);
-                                        intent.putExtra("NAME", marker.getTitle());
+                                        Intent intent = new Intent(Map_participant_Activity.this, TabActivity.class);
+                                        //intent.putExtra("NAME", marker.getTitle());
                                         System.out.println("marker.getTitle()=" + marker.getTitle());
                                         startActivity(intent);
                                     }

@@ -38,6 +38,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import geotouer4.yoslab.net.myapplication.Utils.ImageUtil;
+
 public class PaintActivity extends Activity {
 
     // 独自のカスタムViewクラスのインスタンス変数

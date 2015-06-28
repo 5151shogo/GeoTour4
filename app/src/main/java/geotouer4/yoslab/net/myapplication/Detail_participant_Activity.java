@@ -158,38 +158,38 @@ public class Detail_participant_Activity extends Activity {
         Button button1 = (Button) findViewById(R.id.map);
         button1.setTag("back1");
         button1.setOnClickListener(new
-
         ButtonClickListener()
-
         );
 
         //ボタンオブジェクト作成(カメラ)
         Button button2 = (Button) findViewById(R.id.camera);
         button2.setTag("camera");
         button2.setOnClickListener(new
-
-        ButtonClickListener()
-
+                        ButtonClickListener()
         );
 
-        System.out.println("guide_id="+guide_id);
+        System.out.println("guide_id=" + guide_id);
         //ボタンオブジェクト作成(ガイドの写真を見る機能)
         Button button3 = (Button) findViewById(R.id.watch);
         button3.setTag("watch");
         button3.setOnClickListener(new
-
-        ButtonClickListener()
-
+                        ButtonClickListener()
         );
 
         //ボタンオブジェクト作成(保存)
         Button button4 = (Button) findViewById(R.id.save);
         button4.setTag("save");
         button4.setOnClickListener(new
-
-        ButtonClickListener()
-
+                        ButtonClickListener()
         );
+
+//        //ボタンオブジェクト作成(Twitter)
+//        Button button5 = (Button) findViewById(R.id.twitter_main);
+//        button5.setTag("twitter");
+//        button5.setOnClickListener(new
+//                        ButtonClickListener()
+//        );
+
     }
 
     // クリックリスナー定義

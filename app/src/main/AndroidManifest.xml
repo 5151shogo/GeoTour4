@@ -125,16 +125,16 @@
             android:name=".Weather2_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Udp_Activity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Udp_get_Activity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".TabActivity"
             android:label="@string/title_activity_tab"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Twitter_Main_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TwitterOAuthActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

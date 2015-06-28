@@ -12,6 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import geotouer4.yoslab.net.myapplication.Utils.ImageUtil;
+
 public class ParticipantActivity extends Activity{
 
 	private static final String TAG = ParticipantActivity.class.getSimpleName();

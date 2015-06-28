@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import java.io.File;
 import java.io.IOException;
 
+import geotouer4.yoslab.net.myapplication.Utils.ImageUtil;
 import geotouer4.yoslab.net.myapplication.model.Flag;
 
 
@@ -91,20 +92,7 @@ public class TopActivity extends Activity{
 			}
 		});
 
-		Button udp = (Button)findViewById(R.id.udp);
-		udp.setOnClickListener(new View.OnClickListener() {
 
-			@Override//アニメーション
-			public void onClick(View v) {
-				flag.transitionCount = 0;
-				Intent cacheIntent = new Intent(TopActivity.this, Udp_Activity.class);
-				startActivity(cacheIntent);
-				overridePendingTransition(R.anim.zoom_enter,R.anim.zoom_exit);
-			}
-		});
-		
-		
-		
 		mkdirSD(TopActivity.this, null);
 	}
 	

@@ -1,5 +1,6 @@
 package geotouer4.yoslab.net.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -34,6 +35,7 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
      */
     ViewPager mViewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,10 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+
+
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -97,19 +103,44 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         return super.onOptionsItemSelected(item);
     }
 
+
+    // クリックリスナー定義
+    class ButtonClickListener implements View.OnClickListener {
+        // onClickメソッド(ボタンクリック時イベントハンドラ)
+        @Override
+        public void onClick(View v) {
+            //Intent intent = getIntent();
+            String tag = (String) v.getTag();
+            if (tag.equals("twitter")) {
+                TwitterActivity();
+            }
+        }
+    }
+
+    private void TwitterActivity() {
+        Intent intent = new Intent(TabActivity.this, Twitter_Main_Activity.class);
+        startActivity(intent);
+
+    }
+
+
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
+        System.out.println("Tab1を開いている");
         mViewPager.setCurrentItem(tab.getPosition());
+
     }
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        System.out.println("Tab2,3を開いている");
     }
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        System.out.println("何ここ");
     }
 
     /**
@@ -182,5 +213,6 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
             return rootView;
         }
     }
+
 
 }

@@ -6,10 +6,26 @@
     <!--android:orientation="vertical"
     android:gravity="right">-->
 
+    <ListView
+        android:id="@+id/list_twitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
     <Button
-        android:id="@+id/twitter_main"
+        android:id="@+id/btn_launch_oauth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="呟く"/>
+        android:text="OAuth認証"/>
+
+    <Button
+        android:id="@+id/btn_clear_credentials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="credient"/>
+
+    <TextView
+        android:id="@+id/text_twitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.Locale;
 
@@ -111,14 +112,14 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         public void onClick(View v) {
             //Intent intent = getIntent();
             String tag = (String) v.getTag();
-            if (tag.equals("twitter")) {
                 TwitterActivity();
-            }
         }
     }
 
     private void TwitterActivity() {
+        System.out.println("TabからTwitterへ");
         Intent intent = new Intent(TabActivity.this, Twitter_Main_Activity.class);
+        System.out.println("yyyyy");
         startActivity(intent);
 
     }
@@ -129,6 +130,11 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         System.out.println("Tab1を開いている");
+        Button button1 = (Button)findViewById(R.id.twitter_button);
+        button1.setTag("twitter");
+        button1.setOnClickListener(new
+                        ButtonClickListener()
+        );
         mViewPager.setCurrentItem(tab.getPosition());
 
     }

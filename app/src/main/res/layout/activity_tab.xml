@@ -1,7 +1,26 @@
-<android.support.v4.view.ViewPager
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/twitter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_customize_3"
+        android:layout_marginLeft="50dp"
+        android:text="呟くなう"/>
+
+    <android.support.v4.view.ViewPager
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="geotouer4.yoslab.net.myapplication.TabActivity" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="geotouer4.yoslab.net.myapplication.TabActivity" >
+
+
+
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

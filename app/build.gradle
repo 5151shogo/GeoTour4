@@ -33,5 +33,6 @@ dependencies {
     compile 'org.apache.httpcomponents:httpcore:4.4'
     compile 'org.apache.httpcomponents:httpmime:4.3.6'
     compile 'org.twitter4j:twitter4j-core:4.0.4'
+    compile files('libs/lib/android-smart-image-view-1.0.0.jar')
 }
 

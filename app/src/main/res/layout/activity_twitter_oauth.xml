@@ -6,13 +6,12 @@
     android:layout_height="match_parent" >
     <!--android:orientation="vertical"
     android:gravity="right">-->
-
     <Button
-        android:id="@+id/oauth_button"
+        android:id="@+id/action_start_oauth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Oauth認証" />
+        android:text="Button" />
 
 </LinearLayout>

@@ -8,11 +8,9 @@ import geotouer4.yoslab.net.myapplication.R;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
-/**
- * Created by s175029 on 2015/06/28.
- */
-public class TwitterUtils {
 
+
+public class TwitterUtils {
     private static final String TOKEN = "token";
     private static final String TOKEN_SECRET = "token_secret";
     private static final String PREF_NAME = "twitter_access_token";

@@ -90,7 +90,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="twitter_consumer_key">7n43YuSTD4FY9aLCm93m20IzQ</string>
-    <string name="twitter_consumer_secret">WnalSMt2Lso5YqizfbqzBCCPr0qEBcRqeCBQ9QGdrdxL1MI2CU</string>
-   
+    <string name="twitter_consumer_secret">WnaISMt2Lso5YqizfbqzBCCPr0qEBcRqeCBQ9QGdrdxL1Ml2CU</string>
+    <string name="twitter_oauth">Twitter認証</string>
+    <string name="twitter_callback_url">app://twitter</string>
+    <string name="menu_refresh">更新</string>
 
 </resources>

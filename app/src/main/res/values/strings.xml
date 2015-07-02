@@ -94,5 +94,6 @@
     <string name="twitter_oauth">Twitter認証</string>
     <string name="twitter_callback_url">app://twitter</string>
     <string name="menu_refresh">更新</string>
+    <string name="menu_tweet">つぶやくぜ</string>
 
 </resources>

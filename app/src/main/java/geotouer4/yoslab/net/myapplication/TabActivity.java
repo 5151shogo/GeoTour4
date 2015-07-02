@@ -1,5 +1,6 @@
 package geotouer4.yoslab.net.myapplication;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,33 +15,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 
 public class TabActivity extends ActionBarActivity implements ActionBar.TabListener {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     ViewPager mViewPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
+
+
+
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -100,8 +91,20 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         if (id == R.id.action_settings) {
             return true;
         }
-
+        switch (item.getItemId()) {
+            case R.id.menu_refresh:
+                showToast("更新しました");
+                return true;
+            case R.id.menu_tweet:
+                Intent intent = new Intent(this, TweetActivity.class);
+                startActivity(intent);
+                return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -112,7 +115,12 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         public void onClick(View v) {
             //Intent intent = getIntent();
             String tag = (String) v.getTag();
+            if(tag.equals("twitter")) {
                 TwitterActivity();
+            }
+            else if(tag.equals("twitter2")){
+                System.out.println("okokkkkkokokkkokkoko");
+            }
         }
     }
 
@@ -130,11 +138,11 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         System.out.println("Tab1を開いている");
-        Button button1 = (Button)findViewById(R.id.twitter_button);
-        button1.setTag("twitter");
-        button1.setOnClickListener(new
-                        ButtonClickListener()
-        );
+//        Button button1 = (Button)findViewById(R.id.twitter_button);
+//        button1.setTag("twitter");
+//        button1.setOnClickListener(new
+//                        ButtonClickListener()
+//        );
         mViewPager.setCurrentItem(tab.getPosition());
 
     }
@@ -142,6 +150,7 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         System.out.println("Tab2,3を開いている");
+
     }
 
     @Override
@@ -175,6 +184,7 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
+            System.out.println("position="+position);
             switch (position) {
                 case 0:
                     return getString(R.string.title_section1).toUpperCase(l);

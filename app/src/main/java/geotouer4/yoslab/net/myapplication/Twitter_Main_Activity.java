@@ -101,6 +101,10 @@ public class Twitter_Main_Activity extends ListActivity {
 			case R.id.menu_refresh:
 				reloadTimeLine();
 				return true;
+			case R.id.menu_tweet:
+				Intent intent = new Intent(this, TweetActivity.class);
+				startActivity(intent);
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

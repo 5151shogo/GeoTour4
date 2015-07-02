@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     android:padding="8dp">
 
+    <!--<Button-->
+        <!--android:id="@+id/twitter_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/button_customize_3"-->
+        <!--android:layout_marginLeft="50dp"-->
+        <!--android:text="呟くなう"-->
+        <!--android:layout_gravity="right" />-->
+
     <Button
         android:id="@+id/action_tweet"
         android:layout_width="match_parent"

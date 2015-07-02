@@ -2,8 +2,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="geotouer4.yoslab.net.myapplication.TabActivity">
-    <item android:id="@+id/action_settings"
+    <item
+        android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/update_button"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="@string/menu_refresh" />
+    <item
+        android:id="@+id/menu_tweet"
+        android:icon="@drawable/menu"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:title="@string/menu_tweet"/>
 </menu>

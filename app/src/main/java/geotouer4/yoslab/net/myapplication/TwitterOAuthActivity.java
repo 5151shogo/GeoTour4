@@ -25,6 +25,7 @@ public class TwitterOAuthActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_oauth);
 
+        System.out.println("OAuthActivity来た");
         mCallbackURL = getString(R.string.twitter_callback_url);
         mTwitter = TwitterUtils.getTwitterInstance(this);
 

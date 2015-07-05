@@ -1,6 +1,8 @@
 package geotouer4.yoslab.net.myapplication;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,23 +14,46 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.image.SmartImageView;
+
 import java.util.Locale;
+
+import geotouer4.yoslab.net.myapplication.Utils.TwitterUtils;
+import twitter4j.Status;
+import twitter4j.Twitter;
 
 
 public class TabActivity extends ActionBarActivity implements ActionBar.TabListener {
 
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
+    private TweetAdapter mAdapter;
+    private Twitter mTwitter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
+
+        Button button = (Button)findViewById(R.id.twitter_button);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override//アニメーション
+            public void onClick(View v) {
+                Oauth();
+                Intent cacheIntent = new Intent(TabActivity.this, TweetActivity.class);
+                startActivity(cacheIntent);
+            }
+        });
 
 
 
@@ -73,27 +98,47 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
     }
 
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_tab, menu);
+//        return true;
+//    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_tab, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_twitter_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        switch (item.getItemId()) {
+//            case R.id.menu_refresh:
+//                showToast("更新しました");
+//                return true;
+//            case R.id.menu_tweet:
+//                Intent intent = new Intent(this, TweetActivity.class);
+//                startActivity(intent);
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
         switch (item.getItemId()) {
             case R.id.menu_refresh:
-                showToast("更新しました");
                 return true;
             case R.id.menu_tweet:
                 Intent intent = new Intent(this, TweetActivity.class);
@@ -123,6 +168,53 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
             }
         }
     }
+
+
+
+    private class TweetAdapter extends ArrayAdapter<Status> {
+
+        private LayoutInflater mInflater;
+
+        public TweetAdapter(Context context) {
+            super(context, android.R.layout.simple_list_item_1);
+            mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.list_item_tweet, null);
+            }
+            Status item = getItem(position);
+            TextView name = (TextView) convertView.findViewById(R.id.twitter_name);
+            name.setText(item.getUser().getName());
+            TextView screenName = (TextView) convertView.findViewById(R.id.screen_name);
+            screenName.setText("@" + item.getUser().getScreenName());
+            TextView text = (TextView) convertView.findViewById(R.id.text);
+            text.setText(item.getText());
+            SmartImageView icon = (SmartImageView)convertView.findViewById(R.id.icon);
+            icon.setImageUrl(item.getUser().getProfileImageURL());
+            return convertView;
+        }
+    }
+
+
+
+
+
+    private void Oauth(){
+        System.out.println("OAuth認証きた");
+        if (!TwitterUtils.hasAccessToken(this)) {
+            System.out.println("OAuth認証Activityへ飛ぶ");
+            Intent intent = new Intent(this, TwitterOAuthActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            mAdapter = new TweetAdapter(this);
+            mTwitter = TwitterUtils.getTwitterInstance(this);
+        }
+    }
+
 
     private void TwitterActivity() {
         System.out.println("TabからTwitterへ");

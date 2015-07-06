@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,36 +36,21 @@ public class Twitter_Main_Activity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		//setContentViewより前にWindowにActionBar表示を設定
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-
-		Button button = (Button)findViewById(R.id.btn_launch_oauth);
-		button.setOnClickListener(new View.OnClickListener() {
-
-			@Override//アニメーション
-			public void onClick(View v) {
-				Oauth();
-				Intent cacheIntent = new Intent(Twitter_Main_Activity.this, TweetActivity.class);
-				startActivity(cacheIntent);
-			}
-		});
+		Oauth();
 	}
 
 	private void Oauth(){
-		if (!TwitterUtils.hasAccessToken(this)) {
-			Intent intent = new Intent(this, TwitterOAuthActivity.class);
-			startActivity(intent);
-			finish();
-		} else {
-			mAdapter = new TweetAdapter(this);
-			setListAdapter(mAdapter);
+		mAdapter = new TweetAdapter(this);
+		setListAdapter(mAdapter);
 
-			mTwitter = TwitterUtils.getTwitterInstance(this);
-			reloadTimeLine();
-		}
+		mTwitter = TwitterUtils.getTwitterInstance(this);
+		reloadTimeLine();
+
 	}
 
 
 	private void reloadTimeLine() {
-		AsyncTask<Void, Void, List<twitter4j.Status>> task = new AsyncTask<Void, Void, List<twitter4j.Status>>() {
+		AsyncTask<Void, Void, List<Status>> task = new AsyncTask<Void, Void, List<twitter4j.Status>>() {
 			@Override
 			protected List<twitter4j.Status> doInBackground(Void... params) {
 				try {

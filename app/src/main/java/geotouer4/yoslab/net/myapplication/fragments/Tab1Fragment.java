@@ -22,4 +22,8 @@ public class Tab1Fragment extends Fragment {
         view.setBackgroundColor(Color.GREEN);
         return view;
     }
+
+
+
+
 }

@@ -1,6 +1,5 @@
 package geotouer4.yoslab.net.myapplication;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,15 +20,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.loopj.android.image.SmartImageView;
 
 import java.util.Locale;
 
 import geotouer4.yoslab.net.myapplication.Utils.TwitterUtils;
+import geotouer4.yoslab.net.myapplication.fragments.Tab1Fragment;
 import twitter4j.Status;
 import twitter4j.Twitter;
+
 
 
 public class TabActivity extends ActionBarActivity implements ActionBar.TabListener {
@@ -44,26 +44,20 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
-        Button button = (Button)findViewById(R.id.twitter_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        System.out.println("onCreateの場所");
 
-            @Override//アニメーション
-            public void onClick(View v) {
-                Oauth();
-                Intent cacheIntent = new Intent(TabActivity.this, TweetActivity.class);
-                startActivity(cacheIntent);
-            }
-        });
+        // ボタンオブジェクトオブジェクト取得(戻る)
+        Button button1 = (Button) findViewById(R.id.twitter_button);
+        button1.setTag("twitter");
+        button1.setOnClickListener(new ButtonClickListener());
 
-
-
+        Button button2 = (Button)findViewById(R.id.Tab_camera);
+        button2.setTag("camera");
+        button2.setOnClickListener(new ButtonClickListener());
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-
-
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -148,9 +142,9 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         return super.onOptionsItemSelected(item);
     }
 
-    private void showToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
+    //private void showToast(String text) {
+        //Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    //}
 
 
     // クリックリスナー定義
@@ -158,13 +152,14 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
         // onClickメソッド(ボタンクリック時イベントハンドラ)
         @Override
         public void onClick(View v) {
+            System.out.println("ClickListrener");
             //Intent intent = getIntent();
             String tag = (String) v.getTag();
             if(tag.equals("twitter")) {
                 TwitterActivity();
             }
-            else if(tag.equals("twitter2")){
-                System.out.println("okokkkkkokokkkokkoko");
+            else if(tag.equals("camera")){
+                CameraActivity();
             }
         }
     }
@@ -200,54 +195,54 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
 
 
 
-
-
-    private void Oauth(){
-        System.out.println("OAuth認証きた");
-        if (!TwitterUtils.hasAccessToken(this)) {
-            System.out.println("OAuth認証Activityへ飛ぶ");
-            Intent intent = new Intent(this, TwitterOAuthActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            mAdapter = new TweetAdapter(this);
-            mTwitter = TwitterUtils.getTwitterInstance(this);
-        }
-    }
+//    private void Oauth(){
+//        System.out.println("OAuth認証きた");
+//        if (!TwitterUtils.hasAccessToken(this)) {
+//            System.out.println("OAuth認証Activityへ飛ぶ");
+//            Intent intent = new Intent(this, TwitterOAuthActivity.class);
+//            startActivity(intent);
+//            finish();
+//        } else {
+//            mAdapter = new TweetAdapter(this);
+//            mTwitter = TwitterUtils.getTwitterInstance(this);
+//        }
+//    }
 
 
     private void TwitterActivity() {
         System.out.println("TabからTwitterへ");
-        Intent intent = new Intent(TabActivity.this, Twitter_Main_Activity.class);
-        System.out.println("yyyyy");
-        startActivity(intent);
+        if(!TwitterUtils.hasAccessToken(this)){
+            Intent intent = new Intent(TabActivity.this, TwitterOAuthActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(TabActivity.this, TweetActivity.class);
+            startActivity(intent);
+        }
+    }
 
+    private void CameraActivity() {
+        System.out.println("TabからCameraへ");
+        Intent intent = new Intent(TabActivity.this, CameraActivity.class);
+        System.out.println("ddddd");
+        startActivity(intent);
     }
 
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        // When the given tab is selected, switch to the corresponding page in
-        // the ViewPager.
-        System.out.println("Tab1を開いている");
-//        Button button1 = (Button)findViewById(R.id.twitter_button);
-//        button1.setTag("twitter");
-//        button1.setOnClickListener(new
-//                        ButtonClickListener()
-//        );
+        System.out.println("onTabSelectedの場所");
         mViewPager.setCurrentItem(tab.getPosition());
-
     }
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        System.out.println("Tab2,3を開いている");
-
+        System.out.println("onTabUnselectedの場所");
     }
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        System.out.println("何ここ");
+        System.out.println("onTabReselectedの場所");
     }
 
     /**
@@ -262,9 +257,12 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
 
         @Override
         public Fragment getItem(int position) {
+            Tab1Fragment fragment = new Tab1Fragment();
+            return fragment;
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+//            return PlaceholderFragment.newInstance(position + 1);
+
         }
 
         @Override
@@ -279,30 +277,24 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
             System.out.println("position="+position);
             switch (position) {
                 case 0:
+                    System.out.println("1番目");
                     return getString(R.string.title_section1).toUpperCase(l);
                 case 1:
+                    System.out.println("2番目");
                     return getString(R.string.title_section2).toUpperCase(l);
                 case 2:
+                    System.out.println("3番目");
                     return getString(R.string.title_section3).toUpperCase(l);
             }
             return null;
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -311,14 +303,28 @@ public class TabActivity extends ActionBarActivity implements ActionBar.TabListe
             return fragment;
         }
 
-        public PlaceholderFragment() {
-        }
+//        public PlaceholderFragment() {
+//        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
-            return rootView;
+            //if(){
+                View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
+                return rootView;
+            //}
+//            else if(){
+//                View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
+//                return rootView;
+//            }
+//            else if(){
+//                View rootView = inflater.inflate(R.layout.fragment_tab2, container, false);
+//                return rootView;
+//            }
+//            else{
+//                View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
+//                return rootView;
+//            }
         }
     }
 

@@ -121,13 +121,11 @@ public class Select2Activity extends Activity {
             } else if (tag.equals("go")) {
                 next();
             }
-
         }
     }
 
 
     void finishActivity() {
-
         finish();
     }
 

@@ -28,11 +28,6 @@ public class Tab1Fragment extends Fragment {
         return fragment;
     }
 
-    /**
-     *
-     * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
-     *      android.view.ViewGroup, android.os.Bundle)
-     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +46,6 @@ public class Tab1Fragment extends Fragment {
         // フォントサイズ変更
         textView.setTextSize(180.0f);
 
-        //
         return textView;
     }
 

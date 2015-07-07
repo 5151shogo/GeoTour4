@@ -47,8 +47,9 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyD0QtUC590CCXvJMiVwsq7VJ15sFiScGyM" />
-            <!--android:value="AIzaSyAfUQGSCgj6Mb_3mHnYxL8M3JgYU0fGCTU"/>-->
+            android:value="AIzaSyAfUQGSCgj6Mb_3mHnYxL8M3JgYU0fGCTU"></meta-data>
+            <!--android:value="AIzaSyD0QtUC590CCXvJMiVwsq7VJ15sFiScGyM" />大学-->
+            <!--android:value="AIzaSyAfUQGSCgj6Mb_3mHnYxL8M3JgYU0fGCTU"/>自宅-->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

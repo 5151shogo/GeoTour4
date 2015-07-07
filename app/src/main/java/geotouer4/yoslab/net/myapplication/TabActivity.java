@@ -36,7 +36,7 @@ public class TabActivity extends ActionBarActivity {
         ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // タブに対するフラグメントインスタンスを生成
-        mTabFragments.add(TabFragment.newInstance("1"));
+        mTabFragments.add(TabFragment.newInstance("ok"));
         mTabFragments.add(Tab1Fragment.newInstance("2"));
         mTabFragments.add(Tab2Fragment.newInstance("3"));
 
@@ -54,7 +54,7 @@ public class TabActivity extends ActionBarActivity {
         ab.addTab(tab3);
 
         // デフォルトの状態選択を変更する
-        ab.setSelectedNavigationItem(2);
+        ab.setSelectedNavigationItem(0);
 
     }
 

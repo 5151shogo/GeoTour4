@@ -33,21 +33,39 @@ public class TabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // TextViewを生成する
-        TextView textView = new TextView(getActivity());
-        // 幅、高さの設定
-        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        textView.setLayoutParams(layout);
-        // 文字の位置の設定
-        textView.setGravity(Gravity.CENTER);
-        // 文字を設定
-        textView.setText(getArguments().getString("title"));
-        // フォントサイズ変更
-        textView.setTextSize(180.0f);
 
-        return textView;
+        //レイアウトを作る
+        LinearLayout layout1 = new LinearLayout(getActivity());
+        //レイアウトは縦に並ぶ
+        layout1.setOrientation(LinearLayout.VERTICAL);
+
+        TextView textview = new TextView(getActivity());
+        textview.setText("ツイート内容");
+        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        textview.setLayoutParams(layout);
+        textview.setGravity(Gravity.LEFT);
+
+
+
+//
+//        // TextViewを生成する
+//        TextView textView2 = new TextView(getActivity());
+//        // 幅、高さの設定
+//        LinearLayout.LayoutParams layout2 = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT,
+//                LinearLayout.LayoutParams.MATCH_PARENT);
+//        textView2.setLayoutParams(layout2);
+//        // 文字の位置の設定
+//        textView2.setGravity(Gravity.CENTER);
+//        // 文字を設定
+//        textView2.setText(getArguments().getString("title"));
+//        // フォントサイズ変更
+//        textView2.setTextSize(180.0f);
+
+            return layout1;
+
     }
 }
 

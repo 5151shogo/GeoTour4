@@ -2,22 +2,35 @@ package geotouer4.yoslab.net.myapplication;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
+import geotouer4.yoslab.net.myapplication.Utils.TwitterUtils;
 import geotouer4.yoslab.net.myapplication.fragments.Tab1Fragment;
 import geotouer4.yoslab.net.myapplication.fragments.Tab2Fragment;
 import geotouer4.yoslab.net.myapplication.fragments.TabFragment;
+import twitter4j.Twitter;
 
 public class TabActivity extends ActionBarActivity {
 
     private static ArrayList<Fragment> mTabFragments = new ArrayList<Fragment>();
+    private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
+    public Twitter mTwitter;
+    public TweetAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +48,26 @@ public class TabActivity extends ActionBarActivity {
         // ActionBarのNavigationModeを設定する
         ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+
+
+
+
+        // ボタンオブジェクトオブジェクト取得(戻る)
+        Button button1 = (Button) findViewById(R.id.twitter_button);
+        button1.setTag("twitter");
+        button1.setOnClickListener(new ButtonClickListener());
+
+        Button button2 = (Button)findViewById(R.id.Tab_camera);
+        button2.setTag("camera");
+        button2.setOnClickListener(new ButtonClickListener());
+
+        Button button3 = (Button)findViewById(R.id.TL_button);
+        button3.setTag("TL");
+        button3.setOnClickListener(new ButtonClickListener());
+
         // タブに対するフラグメントインスタンスを生成
-        mTabFragments.add(TabFragment.newInstance("ok"));
-        mTabFragments.add(Tab1Fragment.newInstance("2"));
+        mTabFragments.add(TabFragment.newInstance("1"));
+        mTabFragments.add(Tab1Fragment.newInstance(""));
         mTabFragments.add(Tab2Fragment.newInstance("3"));
 
         // リスナー生成
@@ -57,6 +87,69 @@ public class TabActivity extends ActionBarActivity {
         ab.setSelectedNavigationItem(0);
 
     }
+
+
+
+
+    // クリックリスナー定義
+    class ButtonClickListener implements View.OnClickListener {
+        // onClickメソッド(ボタンクリック時イベントハンドラ)
+        @Override
+        public void onClick(View v) {
+            System.out.println("ClickListrener");
+            //Intent intent = getIntent();
+            String tag = (String) v.getTag();
+            if(tag.equals("twitter")) {
+                TwitterActivity();
+            }
+            else if(tag.equals("camera")){
+                CameraActivity();
+            }
+            else if(tag.equals("TL")){
+                TLActivity();
+            }
+        }
+    }
+
+        private class TweetAdapter extends ArrayAdapter<AsyncTask.Status> {
+
+        private LayoutInflater mInflater;
+
+        public TweetAdapter(Context context) {
+            super(context, android.R.layout.simple_list_item_1);
+            mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        }
+    }
+
+
+    private void TwitterActivity() {
+        System.out.println("TabからTwitterへ");
+        if(!TwitterUtils.hasAccessToken(this)){
+            Intent intent = new Intent(TabActivity.this, TwitterOAuthActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(TabActivity.this, TweetActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void CameraActivity() {
+        System.out.println("TabからCameraへ");
+        Intent intent = new Intent(TabActivity.this, CameraActivity.class);
+        System.out.println("ddddd");
+        startActivity(intent);
+    }
+
+    private void TLActivity() {
+        System.out.println("TabからTLへ");
+        Intent intent = new Intent(TabActivity.this, Twitter_Main_Activity.class);
+        System.out.println("ssssssssss");
+        startActivity(intent);
+    }
+
+
+
 
     /*
      * ActionBarのタブリスナー
@@ -99,7 +192,7 @@ public class TabActivity extends ActionBarActivity {
                     + " : position => " + tab.getPosition());
             // Fragmentの置換
             ft.replace(R.id.tab_contents, mTabFragments.get(tab.getPosition()));
-
+//            mViewPager.setCurrentItem(tab.getPosition());
         }
 
         /*

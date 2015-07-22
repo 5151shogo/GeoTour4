@@ -13,20 +13,25 @@
         android:layout_height="?attr/actionBarSize"
         />
 
+    <ListView
+        android:id="@+id/twitter_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sssssss"/>
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:text="フラグメント1"/>-->
 
-    <Button
-        android:id="@+id/twitter_button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_customize_3"
-        android:layout_marginLeft="50dp"
-        android:text="TLを見る"
-        android:textColor="#FFFFFF"
-        android:layout_gravity="right" />
+    <!--<Button-->
+        <!--android:id="@+id/twitter_button2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/button_customize_3"-->
+        <!--android:layout_marginLeft="50dp"-->
+        <!--android:text="TLを見る"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:layout_gravity="right" />-->
 
 
     

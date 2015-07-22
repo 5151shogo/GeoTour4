@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="8dp">
-
-
+    android:layout_height="wrap_content"
+    android:padding="8dp" >
 
     <com.loopj.android.image.SmartImageView
         android:id="@+id/icon"
@@ -16,29 +13,29 @@
         android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/twitter_name"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/icon"
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@+id/icon"
-        android:text="名前" />
+        android:text="名前入ります" />
 
     <TextView
         android:id="@+id/screen_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/twitter_name"
+        android:layout_alignTop="@+id/name"
         android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/twitter_name"
-        android:text="\uFF20gabu" />
+        android:layout_toRightOf="@+id/name"
+        android:text="\uFF20shogo" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/twitter_name"
-        android:layout_below="@+id/twitter_name"
+        android:layout_alignLeft="@+id/name"
+        android:layout_below="@+id/name"
         android:text="本文本文本文本文本文本文本文本文本文本文" />
 
 </RelativeLayout>

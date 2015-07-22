@@ -45,7 +45,6 @@ public class Twitter_Main_Activity extends ListActivity {
 
 		mTwitter = TwitterUtils.getTwitterInstance(this);
 		reloadTimeLine();
-
 	}
 
 
@@ -121,7 +120,7 @@ public class Twitter_Main_Activity extends ListActivity {
 				convertView = mInflater.inflate(R.layout.list_item_tweet, null);
 			}
 			Status item = getItem(position);
-			TextView name = (TextView) convertView.findViewById(R.id.twitter_name);
+			TextView name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getUser().getName());
 			TextView screenName = (TextView) convertView.findViewById(R.id.screen_name);
 			screenName.setText("@" + item.getUser().getScreenName());

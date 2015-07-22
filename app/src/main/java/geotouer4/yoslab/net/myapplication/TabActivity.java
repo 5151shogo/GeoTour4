@@ -1,35 +1,26 @@
 package geotouer4.yoslab.net.myapplication;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import java.util.ArrayList;
+import com.astuetz.PagerSlidingTabStrip;
 
 import geotouer4.yoslab.net.myapplication.Utils.TwitterUtils;
 import geotouer4.yoslab.net.myapplication.fragments.Tab1Fragment;
-import geotouer4.yoslab.net.myapplication.fragments.Tab2Fragment;
 import geotouer4.yoslab.net.myapplication.fragments.TabFragment;
-import twitter4j.Twitter;
 
 public class TabActivity extends ActionBarActivity {
 
-    private static ArrayList<Fragment> mTabFragments = new ArrayList<Fragment>();
-    private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
-    public Twitter mTwitter;
-    public TweetAdapter mAdapter;
+    // アダプターを定義します。
+    //SectionsPagerAdapter mSectionsPagerAdapter;
 
 
     @Override
@@ -37,20 +28,14 @@ public class TabActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
-        // action bar を取得する
-        ActionBar ab = getSupportActionBar();
 
-        // ActionBarのアイコンを表示しないようにする。 true:表示/false:非表示
-        ab.setDisplayShowHomeEnabled(false);
-        // ActionBarのタイトル名を表示しないようにする。true:表示/false:非表示
-        ab.setDisplayShowTitleEnabled(false);
+        // Initialize the ViewPager and set an adapter
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(new TestAdapter(getSupportFragmentManager()));
 
-        // ActionBarのNavigationModeを設定する
-        ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-
-
-
+        // Bind the tabs to the ViewPager
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabs.setViewPager(pager);
 
         // ボタンオブジェクトオブジェクト取得(戻る)
         Button button1 = (Button) findViewById(R.id.twitter_button);
@@ -60,34 +45,7 @@ public class TabActivity extends ActionBarActivity {
         Button button2 = (Button)findViewById(R.id.Tab_camera);
         button2.setTag("camera");
         button2.setOnClickListener(new ButtonClickListener());
-
-        Button button3 = (Button)findViewById(R.id.TL_button);
-        button3.setTag("TL");
-        button3.setOnClickListener(new ButtonClickListener());
-
-        // タブに対するフラグメントインスタンスを生成
-        mTabFragments.add(TabFragment.newInstance("1"));
-        mTabFragments.add(Tab1Fragment.newInstance(""));
-        mTabFragments.add(Tab2Fragment.newInstance("3"));
-
-        // リスナー生成
-        MainTabListener listener = new MainTabListener(this);
-
-        // タブにリスナーを追加する
-        ActionBar.Tab tab1 = ab.newTab().setText("Tab1").setTabListener(listener);
-        ActionBar.Tab tab2 = ab.newTab().setText("Tab2").setTabListener(listener);
-        ActionBar.Tab tab3 = ab.newTab().setText("Tab3").setTabListener(listener);
-
-        // タブを追加する
-        ab.addTab(tab1);
-        ab.addTab(tab2);
-        ab.addTab(tab3);
-
-        // デフォルトの状態選択を変更する
-        ab.setSelectedNavigationItem(0);
-
     }
-
 
 
 
@@ -105,19 +63,6 @@ public class TabActivity extends ActionBarActivity {
             else if(tag.equals("camera")){
                 CameraActivity();
             }
-            else if(tag.equals("TL")){
-                TLActivity();
-            }
-        }
-    }
-
-        private class TweetAdapter extends ArrayAdapter<AsyncTask.Status> {
-
-        private LayoutInflater mInflater;
-
-        public TweetAdapter(Context context) {
-            super(context, android.R.layout.simple_list_item_1);
-            mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         }
     }
 
@@ -141,79 +86,358 @@ public class TabActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    private void TLActivity() {
-        System.out.println("TabからTLへ");
-        Intent intent = new Intent(TabActivity.this, Twitter_Main_Activity.class);
-        System.out.println("ssssssssss");
+
+    private class TestAdapter extends FragmentPagerAdapter {
+
+        private final String[] TITLES = {"参加者用ページ", "みんなのページ"};
+
+        public TestAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return  new TabFragment();
+                case 1:
+                    return  new Tab1Fragment();
+            }
+
+            return null;
+        }
+
+
+        @Override
+        public int getCount() {
+            return TITLES.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TITLES[position];
+        }
+    }
+
+    public void move() {
+        Intent intent = new Intent(this, Twitter_Main_Activity.class);
         startActivity(intent);
     }
-
-
-
-
-    /*
-     * ActionBarのタブリスナー
-     */
-    public static class MainTabListener implements ActionBar.TabListener {
-
-        private final Activity activity;
-
-        public MainTabListener(Activity activity) {
-            this.activity = activity;
-        }
-
-        /*
-         * 選択されているタブが再度選択された場合に実行
-         *
-         * @see
-         * android.support.v7.app.ActionBar.TabListener#onTabReselected(android.
-         * support.v7.app.ActionBar.Tab,
-         * android.support.v4.app.FragmentTransaction)
-         */
-        @Override
-        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-            // TODO Auto-generated method stub
-            Log.d("MainActivity", "onTabReselected " + tab.getText()
-                    + " : position => " + tab.getPosition());
-        }
-
-        /*
-         * タブが選択された場合に実行
-         *
-         * @see
-         * android.support.v7.app.ActionBar.TabListener#onTabSelected(android
-         * .support .v7.app.ActionBar.Tab,
-         * android.support.v4.app.FragmentTransaction)
-         */
-        @Override
-        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-            // TODO Auto-generated method stub
-            Log.d("MainActivity", "onTabSelected " + tab.getText()
-                    + " : position => " + tab.getPosition());
-            // Fragmentの置換
-            ft.replace(R.id.tab_contents, mTabFragments.get(tab.getPosition()));
-//            mViewPager.setCurrentItem(tab.getPosition());
-        }
-
-        /*
-         * タブの選択が外れた場合に実行
-         *
-         * @see
-         * android.support.v7.app.ActionBar.TabListener#onTabUnselected(android.
-         * support.v7.app.ActionBar.Tab,
-         * android.support.v4.app.FragmentTransaction)
-         */
-        @Override
-        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-            // TODO Auto-generated method stub
-            Log.d("MainActivity", "onTabUnselected " + tab.getText()
-                    + " : position => " + tab.getPosition());
-
-            // Fragment削除
-            // ft.remove(mFragment);
-        }
-    }
 }
+
+
+
+
+
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_tab, menu);
+//        return true;
+//    }
+//
+//    /**
+//     * タブを選択した時の処理
+//     */
+//    @Override
+//    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//        // ここで表示するフラグメントを決定する
+//        // setCurrentItem で、下記の SectionPagerAdapter の getItem を呼び出し
+//        mViewPager.setCurrentItem(tab.getPosition());
+//    }
+//
+//    /**
+//     * タブの選択が外れた場合の処理
+//     */
+//    @Override
+//    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//    }
+//
+//    /**
+//     * タブが2度目以降に選択された場合の処理
+//     */
+//    @Override
+//    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//    }
+//
+//    /**
+//     * ViewPagerの動作を作成
+//     */
+//    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+//
+//        public SectionsPagerAdapter(FragmentManager fm) {
+//            super(fm);
+//        }
+//
+//        /**
+//         * ここでタブに表示する画面を設定する
+//         * positionには0から順のタブの番号が渡される。
+//         * なお、値を渡したいときはコメントアウトしてあるBundleを用いる。
+//         * また、ここでreturnのFragmentの型についてのエラーが出た場合は、import で[android.app.fragment]にしている可能性あり。support.v4に変えよう
+//         */
+//        @Override
+//        public Fragment getItem(int position) {
+//            if (position == 0) {
+//                TabFragment fragment = new TabFragment();
+//                return fragment;
+//            } else if (position == 1) {
+//                Tab1Fragment fragment = new Tab1Fragment();
+//                return fragment;
+//            } else {
+//                Tab2Fragment fragment = new Tab2Fragment();
+//                return fragment;
+//            }
+//            //Bundle args = new Bundle();
+//            // 値をBundle（保存）にする
+//            //args.putInt("testdata", position);
+//            // FragmentにBundleをセットし、値を渡す
+//            //fragment.setArguments(args);
+//        }
+//
+//        /**
+//         * タブの数を決定
+//         */
+//        @Override
+//        public int getCount() {
+//            return 3;
+//        }
+//
+//        /**
+//         * タブのタイトルを決定
+//         */
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            switch (position) {
+//                case 0:
+//                    return getString(R.string.title_section1).toUpperCase();
+//                case 1:
+//                    return getString(R.string.title_section2).toUpperCase();
+//                case 2:
+//                    return getString(R.string.title_section3).toUpperCase();
+//            }
+//            return null;
+//        }
+//    }
+//}
+
+
+
+
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_tab);
+//
+//        // action bar を取得する
+//        ActionBar ab = getSupportActionBar();
+//
+//        // ActionBarのアイコンを表示しないようにする。 true:表示/false:非表示
+//        ab.setDisplayShowHomeEnabled(false);
+//        // ActionBarのタイトル名を表示しないようにする。true:表示/false:非表示
+//        ab.setDisplayShowTitleEnabled(false);
+//
+//        // ActionBarのNavigationModeを設定する
+//        ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//
+//
+//
+//
+//
+//        // ボタンオブジェクトオブジェクト取得(戻る)
+//        Button button1 = (Button) findViewById(R.id.twitter_button);
+//        button1.setTag("twitter");
+//        button1.setOnClickListener(new ButtonClickListener());
+//
+//        Button button2 = (Button)findViewById(R.id.Tab_camera);
+//        button2.setTag("camera");
+//        button2.setOnClickListener(new ButtonClickListener());
+//
+//        Button button3 = (Button)findViewById(R.id.TL_button);
+//        button3.setTag("TL");
+//        button3.setOnClickListener(new ButtonClickListener());
+//
+////        // タブに対するフラグメントインスタンスを生成
+//        mTabFragments.add(TabFragment.newInstance("1"));
+//        mTabFragments.add(Tab1Fragment.newInstance(""));
+//        mTabFragments.add(Tab2Fragment.newInstance("3"));
+//
+//        // リスナー生成
+//        MainTabListener listener = new MainTabListener(this);
+//
+//        // タブにリスナーを追加する
+//        ActionBar.Tab tab1 = ab.newTab().setText("参加者ページ").setTabListener(listener);
+//        ActionBar.Tab tab2 = ab.newTab().setText("みんなのページ").setTabListener(listener);
+//        ActionBar.Tab tab3 = ab.newTab().setText("Tab3").setTabListener(listener);
+//
+//        // タブを追加する
+//        ab.addTab(tab1);
+//        ab.addTab(tab2);
+//        ab.addTab(tab3);
+//
+//        // デフォルトの状態選択を変更する
+//        ab.setSelectedNavigationItem(0);
+
+
+//    }
+
+
+
+
+
+
+
+//
+//    // クリックリスナー定義
+//    class ButtonClickListener implements View.OnClickListener {
+//        // onClickメソッド(ボタンクリック時イベントハンドラ)
+//        @Override
+//        public void onClick(View v) {
+//            System.out.println("ClickListrener");
+//            //Intent intent = getIntent();
+//            String tag = (String) v.getTag();
+//            if(tag.equals("twitter")) {
+//                TwitterActivity();
+//            }
+//            else if(tag.equals("camera")){
+//                CameraActivity();
+//            }
+//            else if(tag.equals("TL")){
+//                TLActivity();
+//            }
+//        }
+//    }
+//
+//        private class TweetAdapter extends ArrayAdapter<AsyncTask.Status> {
+//
+//        private LayoutInflater mInflater;
+//
+//        public TweetAdapter(Context context) {
+//            super(context, android.R.layout.simple_list_item_1);
+//            mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+//        }
+//    }
+//
+//
+//    private void TwitterActivity() {
+//        System.out.println("TabからTwitterへ");
+//        if(!TwitterUtils.hasAccessToken(this)){
+//            Intent intent = new Intent(TabActivity.this, TwitterOAuthActivity.class);
+//            startActivity(intent);
+//        }
+//        else{
+//            Intent intent = new Intent(TabActivity.this, TweetActivity.class);
+//            startActivity(intent);
+//        }
+//    }
+//
+//    private void CameraActivity() {
+//        System.out.println("TabからCameraへ");
+//        Intent intent = new Intent(TabActivity.this, CameraActivity.class);
+//        System.out.println("ddddd");
+//        startActivity(intent);
+//    }
+//
+//            private void TLActivity() {
+//        System.out.println("TabからTLへ");
+//        Intent intent = new Intent(TabActivity.this, Twitter_Main_Activity.class);
+//        System.out.println("ssssssssss");
+//        startActivity(intent);
+//    }
+//
+//
+//
+//
+//    /*
+//     * ActionBarのタブリスナー
+//     */
+//    public static class MainTabListener implements ActionBar.TabListener {
+//
+//        private final Activity activity;
+//
+//        public MainTabListener(Activity activity) {
+//            this.activity = activity;
+//        }
+//
+//        /*
+//         * 選択されているタブが再度選択された場合に実行
+//         *
+//         * @see
+//         * android.support.v7.app.ActionBar.TabListener#onTabReselected(android.
+//         * support.v7.app.ActionBar.Tab,
+//         * android.support.v4.app.FragmentTransaction)
+//         */
+//        @Override
+//        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+//            // TODO Auto-generated method stub
+//            Log.d("MainActivity", "onTabReselected " + tab.getText()
+//                    + " : position => " + tab.getPosition());
+//        }
+//
+//        /*
+//         * タブが選択された場合に実行
+//         *
+//         * @see
+//         * android.support.v7.app.ActionBar.TabListener#onTabSelected(android
+//         * .support .v7.app.ActionBar.Tab,
+//         * android.support.v4.app.FragmentTransaction)
+//         */
+//        @Override
+//        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+//            // TODO Auto-generated method stub
+//            Log.d("MainActivity", "onTabSelected " + tab.getText()
+//                    + " : position => " + tab.getPosition());
+//            // Fragmentの置換
+//            ft.replace(R.id.tab_contents, mTabFragments.get(tab.getPosition()));
+//            //mViewPager.setCurrentItem(tab.getPosition());
+//        }
+//
+//        /*
+//         * タブの選択が外れた場合に実行
+//         *
+//         * @see
+//         * android.support.v7.app.ActionBar.TabListener#onTabUnselected(android.
+//         * support.v7.app.ActionBar.Tab,
+//         * android.support.v4.app.FragmentTransaction)
+//         */
+//        @Override
+//        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+//            // TODO Auto-generated method stub
+//            Log.d("MainActivity", "onTabUnselected " + tab.getText()
+//                    + " : position => " + tab.getPosition());
+//
+//            // Fragment削除
+//            //ft.remove(mFragment);
+//        }
+//
+//        public class SectionsPagerAdapter extends FragmentPagerAdapter {
+//
+//            public SectionsPagerAdapter(FragmentManager fm) {
+//                super(fm);
+//            }
+//
+//        @Override
+//        public Fragment getItem(int position) {
+//            if (position == 0){
+//                Tab1Fragment fragment = new Tab1Fragment();
+//                return fragment;
+//            } else {
+//                Tab2Fragment fragment = new Tab2Fragment();
+//                return fragment;
+//            }
+//            //Bundle args = new Bundle();
+//            // 値をBundle（保存）にする
+//            //args.putInt("testdata", position);
+//            // FragmentにBundleをセットし、値を渡す
+//            //fragment.setArguments(args);
+//        }
+//    }
+//}
+
+
+
+
+
+
+
 
 
 

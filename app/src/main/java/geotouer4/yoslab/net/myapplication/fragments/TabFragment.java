@@ -11,6 +11,7 @@ import geotouer4.yoslab.net.myapplication.R;
 /**
  * Created by s175029 on 2015/07/02.
  */
+
 public class TabFragment extends Fragment {
 
         @Override

@@ -24,7 +24,7 @@ public class Callback_Activity extends Activity {
             String verifier = uri.getQueryParameter("oauth_verifier");
             try {
                 //AccessTokenオブジェクトを取得
-                System.out.println("成功！");
+                System.out.println("認証しました！");
 //                token = TwitterOAuthActivity._oauth.getOAuthAccessToken(TwitterOAuthActivity._req, verifier);
             } catch (Exception e) {
                 e.printStackTrace();

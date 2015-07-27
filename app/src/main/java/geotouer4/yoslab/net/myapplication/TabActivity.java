@@ -32,13 +32,18 @@ import com.astuetz.PagerSlidingTabStrip;
 
 public class TabActivity extends FragmentActivity {
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
+
+        Button button1 = (Button) findViewById(R.id.twitter_button);
+        button1.setTag("twitter");
+        button1.setOnClickListener(new ButtonClickListener());
+
+        Button button2 = (Button) findViewById(R.id.Tab_camera);
+        button2.setTag("camera");
+        button2.setOnClickListener(new ButtonClickListener());
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -77,6 +82,41 @@ public class TabActivity extends FragmentActivity {
             // Generate title based on item position
             return tabTitles[position];
         }
+    }
+
+     //クリックリスナー定義
+    class ButtonClickListener implements View.OnClickListener {
+        // onClickメソッド(ボタンクリック時イベントハンドラ)
+        @Override
+        public void onClick(View v) {
+            System.out.println("ClickListrener");
+            //Intent intent = getIntent();
+            String tag = (String) v.getTag();
+            if (tag.equals("twitter")) {
+                TwitterActivity();
+            } else if (tag.equals("camera")) {
+                CameraActivity();
+            }
+        }
+    }
+
+
+    private void TwitterActivity() {
+        System.out.println("TabからTwitterへ");
+        if (!TwitterUtils.hasAccessToken(this)) {
+            Intent intent = new Intent(TabActivity.this, TwitterOAuthActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(TabActivity.this, TweetActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void CameraActivity() {
+        System.out.println("TabからCameraへ");
+        Intent intent = new Intent(TabActivity.this, CameraActivity.class);
+        System.out.println("ddddd");
+        startActivity(intent);
     }
 
 }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:id="@+id/tab_contents"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/Tab_camera"
@@ -30,34 +32,37 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <!--<Button-->
-        <!--android:id="@+id/TL_button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/button_customize_3"-->
-        <!--android:text="TL"-->
-        <!--android:layout_gravity="right"-->
-        <!--android:textColor="#FFFFFF"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentEnd="true" />-->
-
     <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/tabs"
+        android:id="@+id/tab_strip"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+        android:layout_height="48dp"
+        app:pstsShouldExpand="true" />
+
+    <!--<com.astuetz.viewpager.extensions.PagerSlidingTabStrip-->
+        <!--android:id="@+id/tab_strip"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dip" />-->
+
 
     <android.support.v4.view.ViewPager
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pager"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:context="geotouer4.yoslab.net.myapplication.TabActivity"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/Tab_camera">
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tab_strip" />
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/pager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@android:color/white" />-->
 
-    </android.support.v4.view.ViewPager>
+    <!--<android.support.v4.view.ViewPager-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/pager"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--tools:context="geotouer4.yoslab.net.myapplication.TabActivity"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_above="@+id/Tab_camera" />-->
 </RelativeLayout>

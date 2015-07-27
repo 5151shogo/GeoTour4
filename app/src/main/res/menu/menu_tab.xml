@@ -19,4 +19,9 @@
         android:orderInCategory="200"
         app:showAsAction="always"
         android:title="@string/menu_tweet"/>
+    <item
+        android:id="@+id/action_contact"
+        android:icon="@drawable/ic_launcher"
+        app:showAsAction="ifRoom"
+        android:title="Contact"/>
 </menu>

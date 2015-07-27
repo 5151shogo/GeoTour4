@@ -2,12 +2,23 @@ package geotouer4.yoslab.net.myapplication;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,10 +26,12 @@ import geotouer4.yoslab.net.myapplication.Utils.TwitterUtils;
 import geotouer4.yoslab.net.myapplication.fragments.Tab1Fragment;
 import geotouer4.yoslab.net.myapplication.fragments.TabFragment;
 
-public class TabActivity extends ActionBarActivity {
+import com.astuetz.PagerSlidingTabStrip;
 
-    // アダプターを定義します。
-    //SectionsPagerAdapter mSectionsPagerAdapter;
+
+
+public class TabActivity extends FragmentActivity {
+
 
 
 
@@ -27,108 +40,161 @@ public class TabActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(new TestAdapter(getSupportFragmentManager()));
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager()));
 
-        // Bind the tabs to the ViewPager
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        tabs.setViewPager(pager);
+        // Give the PagerSlidingTabStrip the ViewPager
+        PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tab_strip);
+//        // Attach the view pager to the tab strip
+        tabsStrip.setViewPager(viewPager);
 
 
-        // ボタンオブジェクトオブジェクト取得(戻る)
-        Button button1 = (Button) findViewById(R.id.twitter_button);
-        button1.setTag("twitter");
-        button1.setOnClickListener(new ButtonClickListener());
-
-        Button button2 = (Button) findViewById(R.id.Tab_camera);
-        button2.setTag("camera");
-        button2.setOnClickListener(new ButtonClickListener());
-
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.container, new TopFragment())
-//                .commit();
     }
 
-    //populateContentsListView();
+    public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
+        final int PAGE_COUNT = 2;
+        private String tabTitles[] = new String[] {"参加者用ページ", "みんなのページ"};
 
-
-//        // Initialize the ViewPager and set an adapter
-
-
-    // クリックリスナー定義
-    class ButtonClickListener implements View.OnClickListener {
-        // onClickメソッド(ボタンクリック時イベントハンドラ)
-        @Override
-        public void onClick(View v) {
-            System.out.println("ClickListrener");
-            //Intent intent = getIntent();
-            String tag = (String) v.getTag();
-            if (tag.equals("twitter")) {
-                TwitterActivity();
-            } else if (tag.equals("camera")) {
-                CameraActivity();
-            }
-        }
-    }
-
-
-    private void TwitterActivity() {
-        System.out.println("TabからTwitterへ");
-        if (!TwitterUtils.hasAccessToken(this)) {
-            Intent intent = new Intent(TabActivity.this, TwitterOAuthActivity.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(TabActivity.this, TweetActivity.class);
-            startActivity(intent);
-        }
-    }
-
-    private void CameraActivity() {
-        System.out.println("TabからCameraへ");
-        Intent intent = new Intent(TabActivity.this, CameraActivity.class);
-        System.out.println("ddddd");
-        startActivity(intent);
-    }
-
-
-    private class TestAdapter extends FragmentPagerAdapter {
-
-        private final String[] TITLES = {"参加者用ページ", "みんなのページ"};
-
-        public TestAdapter(FragmentManager fm) {
+        public SampleFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new TabFragment();
-                case 1:
-                    return new Tab1Fragment();
-            }
-
-            return null;
+        public int getCount() {
+            return PAGE_COUNT;
         }
-
 
         @Override
-        public int getCount() {
-            return TITLES.length;
+        public Fragment getItem(int position) {
+            return TabFragment.newInstance(position + 1);
         }
+
+
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return TITLES[position];
+            // Generate title based on item position
+            return tabTitles[position];
         }
     }
 
-
-    public void move() {
-        Intent intent = new Intent(this, Twitter_Main_Activity.class);
-        startActivity(intent);
-    }
 }
+
+//public class TabActivity extends ActionBarActivity {
+//
+//    // アダプターを定義します。
+//    //SectionsPagerAdapter mSectionsPagerAdapter;
+//
+//
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_tab);
+//
+//        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+//        pager.setAdapter(new TestAdapter(getSupportFragmentManager()));
+//
+//        // Bind the tabs to the ViewPager
+//        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs1);
+//        tabs.setViewPager(pager);
+//
+//
+//        // ボタンオブジェクトオブジェクト取得(戻る)
+//        Button button1 = (Button) findViewById(R.id.twitter_button);
+//        button1.setTag("twitter");
+//        button1.setOnClickListener(new ButtonClickListener());
+//
+//        Button button2 = (Button) findViewById(R.id.Tab_camera);
+//        button2.setTag("camera");
+//        button2.setOnClickListener(new ButtonClickListener());
+//
+////        getSupportFragmentManager().beginTransaction()
+////                .replace(R.id.container, new TopFragment())
+////                .commit();
+//    }
+//
+//    //populateContentsListView();
+//
+//
+////        // Initialize the ViewPager and set an adapter
+//
+//
+//    // クリックリスナー定義
+//    class ButtonClickListener implements View.OnClickListener {
+//        // onClickメソッド(ボタンクリック時イベントハンドラ)
+//        @Override
+//        public void onClick(View v) {
+//            System.out.println("ClickListrener");
+//            //Intent intent = getIntent();
+//            String tag = (String) v.getTag();
+//            if (tag.equals("twitter")) {
+//                TwitterActivity();
+//            } else if (tag.equals("camera")) {
+//                CameraActivity();
+//            }
+//        }
+//    }
+//
+//
+//    private void TwitterActivity() {
+//        System.out.println("TabからTwitterへ");
+//        if (!TwitterUtils.hasAccessToken(this)) {
+//            Intent intent = new Intent(TabActivity.this, TwitterOAuthActivity.class);
+//            startActivity(intent);
+//        } else {
+//            Intent intent = new Intent(TabActivity.this, TweetActivity.class);
+//            startActivity(intent);
+//        }
+//    }
+//
+//    private void CameraActivity() {
+//        System.out.println("TabからCameraへ");
+//        Intent intent = new Intent(TabActivity.this, CameraActivity.class);
+//        System.out.println("ddddd");
+//        startActivity(intent);
+//    }
+//
+//
+//    private class TestAdapter extends FragmentPagerAdapter {
+//
+//        private final String[] TITLES = {"参加者用ページ", "みんなのページ"};
+//
+//        public TestAdapter(FragmentManager fm) {
+//            super(fm);
+//        }
+//
+//        @Override
+//        public Fragment getItem(int position) {
+//            switch (position) {
+//                case 0:
+//                    return new TabFragment();
+//                case 1:
+//                    return new Tab1Fragment();
+//            }
+//
+//            return null;
+//        }
+//
+//
+//        @Override
+//        public int getCount() {
+//            return TITLES.length;
+//        }
+//
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            return TITLES[position];
+//        }
+//    }
+//
+//
+//    public void move() {
+//        Intent intent = new Intent(this, Twitter_Main_Activity.class);
+//        startActivity(intent);
+//    }
+//}
 //private void populateContentsListView(){
 //    ListView lv = (ListView)findViewById(R.id.twitter_list);
 //
